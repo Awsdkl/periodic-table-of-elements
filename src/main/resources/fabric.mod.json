@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "periodic-table-of-elements",
+  "version": "${version}",
+  "name": "Periodic Table Of Elements",
+  "description": "",
+  "authors": [
+    "Awsdkl"
+  ],
+  "contact": {
+    "repo": "https://github.com/Awsdkl/periodic-table-of-elements"
+  },
+  "license": "MIT",
+  "icon": "assets/periodic-table-of-elements/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.awsdkl.periodictableofelements.client.PeriodicTableOfElementsClient"
+    ],
+    "main": [
+      "com.awsdkl.periodictableofelements.PeriodicTableOfElements"
+    ]
+  },
+  "mixins": [
+    "periodic-table-of-elements.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.13",
+    "fabric": "*",
+    "minecraft": "1.19.3"
+  }
+}
