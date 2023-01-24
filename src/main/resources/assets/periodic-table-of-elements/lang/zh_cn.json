@@ -1,4 +1,6 @@
 {
   "itemGroup.periodic-table-of-elements.mod_group": "元素周期表",
-  "block.periodic-table-of-elements.gas_tank": "气体储罐"
+  "block.periodic-table-of-elements.l_gas_tank": "大型气体储罐",
+  "block.periodic-table-of-elements.m_gas_tank": "中型气体储罐",
+  "block.periodic-table-of-elements.s_gas_tank": "小型气体储罐"
 }
