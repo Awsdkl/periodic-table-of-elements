@@ -1,4 +1,6 @@
 {
   "itemGroup.periodic-table-of-elements.mod_group": "Periodic Table of Elements",
-  "block.periodic-table-of-elements.gas_tank": "Gas Storage Tank"
+  "block.periodic-table-of-elements.l_gas_tank": "Large Gas Storage Tank",
+  "block.periodic-table-of-elements.m_gas_tank": "Medium Gas Storage Tank",
+  "block.periodic-table-of-elements.s_gas_tank": "Small Gas Storage Tank"
 }
