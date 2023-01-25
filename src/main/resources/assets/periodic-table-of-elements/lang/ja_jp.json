@@ -1,4 +1,6 @@
 {
   "itemGroup.periodic-table-of-elements": "要素の周期表",
-  "block.periodic-table-of-elements.gas_tank": "ガス貯蔵タンク"
+  "block.periodic-table-of-elements.l_gas_tank": "大型ガス貯蔵タンク"
+  "block.periodic-table-of-elements.m_gas_tank": "中型ガス貯蔵タンク"
+  "block.periodic-table-of-elements.s_gas_tank": "小型ガス貯蔵タンク"
 }
