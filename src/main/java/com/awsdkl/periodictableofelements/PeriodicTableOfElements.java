@@ -1,6 +1,7 @@
 package com.awsdkl.periodictableofelements;
 
 import com.awsdkl.periodictableofelements.block.Gas_tank;
+import com.awsdkl.periodictableofelements.blockitem.Gas_tank_item;
 import com.awsdkl.periodictableofelements.recipes.Gas_tank_Recipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -8,7 +9,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;
@@ -25,13 +25,13 @@ public class PeriodicTableOfElements implements ModInitializer {
 
     //创建方块及其物品
     public static final Gas_tank S_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final BlockItem S_GAS_TANK_ITEM = new BlockItem(S_GAS_TANK,new FabricItemSettings());
+    public static final Gas_tank_item S_GAS_TANK_ITEM = new Gas_tank_item(S_GAS_TANK,new FabricItemSettings());
 
     public static final Gas_tank M_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final BlockItem M_GAS_TANK_ITEM = new BlockItem(M_GAS_TANK,new FabricItemSettings());
+    public static final Gas_tank_item M_GAS_TANK_ITEM = new Gas_tank_item(M_GAS_TANK,new FabricItemSettings());
 
     public static final Gas_tank L_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final BlockItem L_GAS_TANK_ITEM = new BlockItem(L_GAS_TANK,new FabricItemSettings());
+    public static final Gas_tank_item L_GAS_TANK_ITEM = new Gas_tank_item(L_GAS_TANK,new FabricItemSettings());
 
 
 

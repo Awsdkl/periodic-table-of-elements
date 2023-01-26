@@ -4,6 +4,7 @@ import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
@@ -65,9 +66,31 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
 
         if(count == 8)
         {
-            if(hasLeather) return PeriodicTableOfElements.S_GAS_TANK_ITEM.getDefaultStack();
-            if(hasS_Gas_tank) return PeriodicTableOfElements.M_GAS_TANK_ITEM.getDefaultStack();
-            if(hasM_Gas_tank) return PeriodicTableOfElements.L_GAS_TANK_ITEM.getDefaultStack();
+            int tmp = 0;
+            ItemStack stack = null;
+            if(hasLeather)
+            {
+                tmp = 1;
+                stack = new ItemStack(PeriodicTableOfElements.S_GAS_TANK_ITEM);
+            }
+            if(hasS_Gas_tank)
+            {
+                tmp = 2;
+                stack = new ItemStack(PeriodicTableOfElements.M_GAS_TANK_ITEM);
+            }
+            if(hasM_Gas_tank)
+            {
+                tmp = 3;
+                stack = new ItemStack(PeriodicTableOfElements.L_GAS_TANK_ITEM);
+            }
+
+            NbtCompound nbt = new NbtCompound();
+            nbt.putInt("model",tmp);
+            nbt.putInt("used",0);//单位:立方厘米
+            nbt.putString("type","empty");
+            assert stack != null;
+            stack.setNbt(nbt);
+            return stack;
         }
         return ItemStack.EMPTY;
     }
