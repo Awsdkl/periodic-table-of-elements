@@ -1,65 +1,78 @@
 package com.awsdkl.periodictableofelements;
 
-import com.awsdkl.periodictableofelements.block.Gas_tank;
-import com.awsdkl.periodictableofelements.blockitem.Gas_tank_item;
-import com.awsdkl.periodictableofelements.recipes.Gas_tank_Recipes;
+import com.awsdkl.periodictableofelements.block.Electrolysis_machine;
+import com.awsdkl.periodictableofelements.block.entities.Electrolysis_machine_Entity;
+import com.awsdkl.periodictableofelements.client.recipes.Gas_tank_Recipes;
+import com.awsdkl.periodictableofelements.item.Gas_tank;
+import com.awsdkl.periodictableofelements.screen.handler.Electrolysis_machine_ScreenHandler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialRecipeSerializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
 public class PeriodicTableOfElements implements ModInitializer {
     public static final String NAMESPACE = "periodic-table-of-elements";
     //特殊合成表
     public static final RecipeSerializer<Gas_tank_Recipes> GAS_TANK_RECIPE = RecipeSerializer.register("gas_tank_recipe", new SpecialRecipeSerializer<>(Gas_tank_Recipes::new));
+    //创建物品
+    public static final Gas_tank S_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
 
+    public static final Gas_tank M_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
 
-    //创建方块及其物品
-    public static final Gas_tank S_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final Gas_tank_item S_GAS_TANK_ITEM = new Gas_tank_item(S_GAS_TANK,new FabricItemSettings());
+    public static final Gas_tank L_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
 
-    public static final Gas_tank M_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final Gas_tank_item M_GAS_TANK_ITEM = new Gas_tank_item(M_GAS_TANK,new FabricItemSettings());
-
-    public static final Gas_tank L_GAS_TANK = new Gas_tank(FabricBlockSettings.of(Material.METAL).strength(0.5f,3.0f).requiresTool());
-    public static final Gas_tank_item L_GAS_TANK_ITEM = new Gas_tank_item(L_GAS_TANK,new FabricItemSettings());
-
-
-
+    //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
+    public static final Electrolysis_machine ELECTROLYSIS_MACHINE = new Electrolysis_machine(FabricBlockSettings.of(Material.METAL));
+    public static final BlockItem ELECTROLYSIS_MACHINE_ITEM = new BlockItem(ELECTROLYSIS_MACHINE,new Item.Settings());
+    public static BlockEntityType<Electrolysis_machine_Entity> ELECTROLYSIS_MACHINE_ENTITY;
+    public static ScreenHandlerType<Electrolysis_machine_ScreenHandler> ELECTROLYSIS_MACHINE_SCREEN_HANDLER;
+    static
+    {
+        ELECTROLYSIS_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolysis_machine"), Electrolysis_machine_ScreenHandler::new);
+    }
 
     //创建物品组
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE,"mod_group"))
-            .icon(() -> new ItemStack(PeriodicTableOfElements.S_GAS_TANK_ITEM))
+            .icon(() -> new ItemStack(PeriodicTableOfElements.S_GAS_TANK))
             .build();
     @Override
     public void onInitialize() {
-        //注册方块及其物品
+        //注册物品
         {
-            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"s_gas_tank"),S_GAS_TANK);
-            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"s_gas_tank"),S_GAS_TANK_ITEM);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"s_gas_tank"),S_GAS_TANK);
 
-            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"m_gas_tank"),M_GAS_TANK);
-            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"m_gas_tank"),M_GAS_TANK_ITEM);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"m_gas_tank"),M_GAS_TANK);
 
-            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"l_gas_tank"),L_GAS_TANK);
-            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"l_gas_tank"),L_GAS_TANK_ITEM);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"l_gas_tank"),L_GAS_TANK);
+        }
+        //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
+        {
+            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE_ITEM);
+            ELECTROLYSIS_MACHINE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"electrolysis_machine"), FabricBlockEntityTypeBuilder.create(Electrolysis_machine_Entity::new,ELECTROLYSIS_MACHINE).build(null));
         }
 
 
         //添加物品到物品组
         ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content -> {
-            content.add(S_GAS_TANK_ITEM);
-            content.add(M_GAS_TANK_ITEM);
-            content.add(L_GAS_TANK_ITEM);
+            content.add(S_GAS_TANK);
+            content.add(M_GAS_TANK);
+            content.add(L_GAS_TANK);
+            content.add(ELECTROLYSIS_MACHINE_ITEM);
         });
     }
 

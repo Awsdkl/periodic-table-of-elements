@@ -1,9 +1,10 @@
 {
   "itemGroup.periodic-table-of-elements.mod_group": "元素周期表",
-  "block.periodic-table-of-elements.l_gas_tank": "大型气体储罐",
-  "block.periodic-table-of-elements.m_gas_tank": "中型气体储罐",
-  "block.periodic-table-of-elements.s_gas_tank": "小型气体储罐",
+  "item.periodic-table-of-elements.l_gas_tank": "大型气体储罐",
+  "item.periodic-table-of-elements.m_gas_tank": "中型气体储罐",
+  "item.periodic-table-of-elements.s_gas_tank": "小型气体储罐",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_1": "储罐型号: %s",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_2": "储罐容量: %.2f / %.2f L",
-  "item.periodic-table-of-elements.gas_tank_item.tooltip_3": "罐内气体: %s"
+  "item.periodic-table-of-elements.gas_tank_item.tooltip_3": "罐内气体: %s",
+  "block.periodic-table-of-elements.electrolysis_machine": "电解装置"
 }

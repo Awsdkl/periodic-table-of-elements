@@ -1,0 +1,21 @@
+{   "parent": "block/block",
+  "textures":
+  {
+    "particle": "block/machine/electrolysis/bottom"
+  },
+  "elements":
+  [
+    {   "from": [ 0, 0, 0 ],
+      "to": [  16, 16, 16 ],
+      "faces":
+      {
+        "down":  { "texture": "block/machine/electrolysis/bottom",    "cullface": "down"},
+        "up":    { "texture": "block/machine/electrolysis/top",    "cullface": "up" },
+        "north": { "texture": "block/machine/electrolysis/north",  "cullface": "north" },
+        "south": { "texture": "block/machine/electrolysis/south",  "cullface": "south" },
+        "west":  { "texture": "block/machine/electrolysis/west",   "cullface": "west" },
+        "east":  { "texture": "block/machine/electrolysis/east",   "cullface": "east" }
+      }
+    }
+  ]
+}
