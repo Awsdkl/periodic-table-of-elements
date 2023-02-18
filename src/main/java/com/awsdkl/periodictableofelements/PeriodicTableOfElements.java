@@ -36,14 +36,16 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final Gas_tank L_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
 
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
-    public static final Electrolysis_machine ELECTROLYSIS_MACHINE = new Electrolysis_machine(FabricBlockSettings.of(Material.METAL));
-    public static final BlockItem ELECTROLYSIS_MACHINE_ITEM = new BlockItem(ELECTROLYSIS_MACHINE,new Item.Settings());
-    public static BlockEntityType<Electrolysis_machine_Entity> ELECTROLYSIS_MACHINE_ENTITY;
-    public static ScreenHandlerType<Electrolysis_machine_ScreenHandler> ELECTROLYSIS_MACHINE_SCREEN_HANDLER;
-    static
-    {
-        ELECTROLYSIS_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolysis_machine"), Electrolysis_machine_ScreenHandler::new);
-    }
+
+    //Electrolysis_machine(电解装置)
+        public static final Electrolysis_machine ELECTROLYSIS_MACHINE = new Electrolysis_machine(FabricBlockSettings.of(Material.METAL));
+        public static final BlockItem ELECTROLYSIS_MACHINE_ITEM = new BlockItem(ELECTROLYSIS_MACHINE,new Item.Settings());
+        public static BlockEntityType<Electrolysis_machine_Entity> ELECTROLYSIS_MACHINE_ENTITY;
+        public static ScreenHandlerType<Electrolysis_machine_ScreenHandler> ELECTROLYSIS_MACHINE_SCREEN_HANDLER;
+        static
+        {
+            ELECTROLYSIS_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolysis_machine"), Electrolysis_machine_ScreenHandler::new);
+        }
 
     //创建物品组
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE,"mod_group"))
