@@ -1,10 +1,13 @@
 package com.awsdkl.periodictableofelements;
 
 import com.awsdkl.periodictableofelements.block.Electrolysis_machine;
+import com.awsdkl.periodictableofelements.block.Industry_crafting_table;
 import com.awsdkl.periodictableofelements.block.entities.Electrolysis_machine_Entity;
+import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
 import com.awsdkl.periodictableofelements.client.recipes.Gas_tank_Recipes;
 import com.awsdkl.periodictableofelements.item.Gas_tank;
 import com.awsdkl.periodictableofelements.screen.handler.Electrolysis_machine_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -47,6 +50,16 @@ public class PeriodicTableOfElements implements ModInitializer {
             ELECTROLYSIS_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolysis_machine"), Electrolysis_machine_ScreenHandler::new);
         }
 
+    //Industry_crafting_table(工业工作台)
+        public static final Industry_crafting_table INDUSTRY_CRAFTING_TABLE = new Industry_crafting_table(FabricBlockSettings.of(Material.METAL));
+        public static final BlockItem INDUSTRY_CRAFTING_TABLE_ITEM = new BlockItem(INDUSTRY_CRAFTING_TABLE,new Item.Settings());
+        public static BlockEntityType<Industry_crafting_table_Entity> INDUSTRY_CRAFTING_TABLE_ENTITY;
+        public static ScreenHandlerType<Industry_crafting_table_ScreenHandler> INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER;
+        static
+        {
+            INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE,"industry_crafting_table"),Industry_crafting_table_ScreenHandler::new);
+        }
+
     //创建物品组
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE,"mod_group"))
             .icon(() -> new ItemStack(PeriodicTableOfElements.S_GAS_TANK))
@@ -66,6 +79,10 @@ public class PeriodicTableOfElements implements ModInitializer {
             Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE);
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE_ITEM);
             ELECTROLYSIS_MACHINE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"electrolysis_machine"), FabricBlockEntityTypeBuilder.create(Electrolysis_machine_Entity::new,ELECTROLYSIS_MACHINE).build(null));
+
+            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"industry_crafting_table"),INDUSTRY_CRAFTING_TABLE);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"industry_crafting_table"),INDUSTRY_CRAFTING_TABLE_ITEM);;
+            INDUSTRY_CRAFTING_TABLE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"industry_crafting_table"),FabricBlockEntityTypeBuilder.create(Industry_crafting_table_Entity::new,INDUSTRY_CRAFTING_TABLE).build(null));
         }
 
 
@@ -75,6 +92,7 @@ public class PeriodicTableOfElements implements ModInitializer {
             content.add(M_GAS_TANK);
             content.add(L_GAS_TANK);
             content.add(ELECTROLYSIS_MACHINE_ITEM);
+            content.add(INDUSTRY_CRAFTING_TABLE_ITEM);
         });
     }
 

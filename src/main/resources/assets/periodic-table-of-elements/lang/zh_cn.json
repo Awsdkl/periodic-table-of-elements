@@ -6,5 +6,6 @@
   "item.periodic-table-of-elements.gas_tank_item.tooltip_1": "储罐型号: %s",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_2": "储罐容量: %.2f / %.2f L",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_3": "罐内气体: %s",
-  "block.periodic-table-of-elements.electrolysis_machine": "电解装置"
+  "block.periodic-table-of-elements.electrolysis_machine": "电解装置",
+  "block.periodic-table-of-elements.industry_crafting_table": "工业工作台"
 }

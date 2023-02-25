@@ -6,39 +6,49 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class Electrolysis_machine_ScreenHandler extends ScreenHandler
-{
+public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
+
     public Inventory inventory;
 
-    public Electrolysis_machine_ScreenHandler(int syncId, PlayerInventory inventory)
+    public Industry_crafting_table_ScreenHandler(int syncId, PlayerInventory playerInventory)
     {
-        this(syncId,inventory,new SimpleInventory(2));
+        this(syncId, playerInventory, new SimpleInventory(10));
     }
 
-    public Electrolysis_machine_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
+    public Industry_crafting_table_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory)
     {
-        super(PeriodicTableOfElements.ELECTROLYSIS_MACHINE_SCREEN_HANDLER,synId);
+        super(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER,syncId);
         this.inventory = inventory;
-        checkSize(inventory,2);
-        this.addSlot(new Slot(this.inventory,0,80,14)
+        checkSize(this.inventory,10);
+
+        //our inventory
+        for(int i = 0;i < 3;i++)
         {
-            @Override
-            public boolean canInsert(ItemStack stack)
+            for(int j = 0;j < 3;j++)
             {
-                return stack.getItem() == Items.WATER_BUCKET;
+                this.addSlot(new Slot(this.inventory,i*3+j,29+18*j,19+18*i)
+                {
+                    @Override
+                    public boolean canInsert(ItemStack stack)
+                    {
+                        return true;
+                    }
+                });
             }
-        });
-        this.addSlot(new Slot(this.inventory,1,152,62)
+        }
+
+        this.addSlot(new Slot(this.inventory,9,125,37)
         {
             @Override
             public boolean canInsert(ItemStack stack)
             {
                 return false;
             }
+
+
         });
 
         for(int i = 0;i < 3;i++)
@@ -52,6 +62,14 @@ public class Electrolysis_machine_ScreenHandler extends ScreenHandler
         {
             this.addSlot(new Slot(playerInventory,i,8 + i * 18,142));
         }
+    }
+
+
+
+    @Override
+    public boolean canUse(PlayerEntity player)
+    {
+        return this.inventory.canPlayerUse(player);
     }
 
     //shift + 左键点击物品
@@ -80,12 +98,4 @@ public class Electrolysis_machine_ScreenHandler extends ScreenHandler
 
         return newStack;
     }
-
-    @Override
-    public boolean canUse(PlayerEntity player)
-    {
-        return this.inventory.canPlayerUse(player);
-    }
-
-
 }
