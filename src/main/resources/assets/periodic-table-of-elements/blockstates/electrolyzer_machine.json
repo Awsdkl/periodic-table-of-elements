@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "facing=north": { "model": "periodic-table-of-elements:block/electrolyzer_machine","uvlock": true },
+    "facing=east":  { "model": "periodic-table-of-elements:block/electrolyzer_machine", "y":  90, "uvlock": true },
+    "facing=south": { "model": "periodic-table-of-elements:block/electrolyzer_machine", "y": 180, "uvlock": true },
+    "facing=west":  { "model": "periodic-table-of-elements:block/electrolyzer_machine", "y": 270, "uvlock": true }
+  }
+}
+

@@ -2,7 +2,7 @@ package com.awsdkl.periodictableofelements.block.entities;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedInventory;
-import com.awsdkl.periodictableofelements.screen.handler.Electrolysis_machine_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,12 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class Electrolysis_machine_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
+public class Electrolyzer_machine_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
 {
     DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2,ItemStack.EMPTY);
-    public Electrolysis_machine_Entity(BlockPos pos, BlockState state)
+    public Electrolyzer_machine_Entity(BlockPos pos, BlockState state)
     {
-        super(PeriodicTableOfElements.ELECTROLYSIS_MACHINE_ENTITY, pos, state);
+        super(PeriodicTableOfElements.ELECTROLYZER_MACHINE_ENTITY, pos, state);
     }
 
 
@@ -38,7 +38,7 @@ public class Electrolysis_machine_Entity extends BlockEntity implements Implemen
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player)
     {
-        return new Electrolysis_machine_ScreenHandler(syncId, inv, this);
+        return new Electrolyzer_machine_ScreenHandler(syncId, inv, this);
     }
 
     @Override

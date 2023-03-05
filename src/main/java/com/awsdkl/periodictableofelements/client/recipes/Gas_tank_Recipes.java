@@ -55,12 +55,9 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
                 if(stack.getItem() == Items.IRON_INGOT) count++;
                 else if(i == 4)
                 {
-                    if(stack.getItem() == Items.LEATHER) hasLeather = true;
-                    else hasLeather = false;
-                    if(stack.getItem() == PeriodicTableOfElements.S_GAS_TANK) hasS_Gas_tank = true;
-                    else hasS_Gas_tank = false;
-                    if(stack.getItem() == PeriodicTableOfElements.M_GAS_TANK) hasM_Gas_tank = true;
-                    else hasM_Gas_tank = false;
+                    hasLeather = stack.getItem() == Items.LEATHER;
+                    hasS_Gas_tank = stack.getItem() == PeriodicTableOfElements.S_GAS_TANK;
+                    hasM_Gas_tank = stack.getItem() == PeriodicTableOfElements.M_GAS_TANK;
                 }
                 else return ItemStack.EMPTY;
             }

@@ -1,7 +1,7 @@
 package com.awsdkl.periodictableofelements.screen;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import com.awsdkl.periodictableofelements.screen.handler.Electrolysis_machine_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -10,11 +10,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Electrolysis_machine_Screen extends HandledScreen<Electrolysis_machine_ScreenHandler>
+public class Electrolyzer_machine_Screen extends HandledScreen<Electrolyzer_machine_ScreenHandler>
 {
-    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE,"textures/gui/electrolysis_machine_gui.png");
+    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE,"textures/gui/electrolyzer_machine_gui.png");
 
-    public Electrolysis_machine_Screen(Electrolysis_machine_ScreenHandler handler, PlayerInventory inventory, Text title)
+    public Electrolyzer_machine_Screen(Electrolyzer_machine_ScreenHandler handler, PlayerInventory inventory, Text title)
     {
         super(handler, inventory, title);
         this.passEvents = false;

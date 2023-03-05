@@ -1,6 +1,6 @@
 package com.awsdkl.periodictableofelements.block;
 
-import com.awsdkl.periodictableofelements.block.entities.Electrolysis_machine_Entity;
+import com.awsdkl.periodictableofelements.block.entities.Electrolyzer_machine_Entity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class Electrolysis_machine extends BlockWithEntity
+public class Electrolyzer_machine extends BlockWithEntity
 {
     public static final DirectionProperty FACING;
     static
@@ -33,7 +33,7 @@ public class Electrolysis_machine extends BlockWithEntity
         FACING = HorizontalFacingBlock.FACING;
     }
 
-    public Electrolysis_machine(Settings settings)
+    public Electrolyzer_machine(Settings settings)
     {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
@@ -49,7 +49,7 @@ public class Electrolysis_machine extends BlockWithEntity
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state)
     {
-        return new Electrolysis_machine_Entity(pos, state);
+        return new Electrolyzer_machine_Entity(pos, state);
     }
 
     @Nullable
@@ -84,8 +84,8 @@ public class Electrolysis_machine extends BlockWithEntity
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof Electrolysis_machine_Entity) {
-                ItemScatterer.spawn(world, pos, (Electrolysis_machine_Entity)blockEntity);
+            if (blockEntity instanceof Electrolyzer_machine_Entity) {
+                ItemScatterer.spawn(world, pos, (Electrolyzer_machine_Entity)blockEntity);
                 // 更新比较器
                 world.updateComparators(pos,this);
             }

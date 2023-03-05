@@ -4,11 +4,11 @@ import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.client.render.GameRenderer;
 
 public class Industry_crafting_table_Screen extends HandledScreen<Industry_crafting_table_ScreenHandler>
 {

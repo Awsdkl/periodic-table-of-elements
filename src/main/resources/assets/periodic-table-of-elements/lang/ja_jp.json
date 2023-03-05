@@ -6,6 +6,6 @@
   "item.periodic-table-of-elements.gas_tank_item.tooltip_1": "モデル: %s",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_2": "容量: %.2f / %.2f L",
   "item.periodic-table-of-elements.gas_tank_item.tooltip_3": "ガス: %s",
-  "block.periodic-table-of-elements.electrolysis_machine": "電解機",
+  "block.periodic-table-of-elements.electrolytic_machine": "電解機",
   "block.periodic-table-of-elements.industry_crafting_table": "工業化の作業台"
 }

@@ -10,18 +10,18 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class Electrolysis_machine_ScreenHandler extends ScreenHandler
+public class Electrolyzer_machine_ScreenHandler extends ScreenHandler
 {
     public Inventory inventory;
 
-    public Electrolysis_machine_ScreenHandler(int syncId, PlayerInventory inventory)
+    public Electrolyzer_machine_ScreenHandler(int syncId, PlayerInventory inventory)
     {
         this(syncId,inventory,new SimpleInventory(2));
     }
 
-    public Electrolysis_machine_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
+    public Electrolyzer_machine_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
     {
-        super(PeriodicTableOfElements.ELECTROLYSIS_MACHINE_SCREEN_HANDLER,synId);
+        super(PeriodicTableOfElements.ELECTROLYZER_MACHINE_SCREEN_HANDLER,synId);
         this.inventory = inventory;
         checkSize(inventory,2);
         this.addSlot(new Slot(this.inventory,0,80,14)

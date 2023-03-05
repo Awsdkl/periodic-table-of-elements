@@ -1,9 +1,12 @@
 package com.awsdkl.periodictableofelements.block;
 
+import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -105,5 +108,12 @@ public class Industry_crafting_table extends BlockWithEntity
 
         Direction dir = state.get(FACING);
         world.setBlockState(pos, state.with(FACING, dir));
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type)
+    {
+        return checkType(type, PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ENTITY,((world1, pos, state1, blockEntity) -> Industry_crafting_table_Entity.tick(blockEntity)));
     }
 }

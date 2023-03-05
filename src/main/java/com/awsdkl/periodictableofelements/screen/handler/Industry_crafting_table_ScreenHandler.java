@@ -13,9 +13,9 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
 
     public Inventory inventory;
 
-    public Industry_crafting_table_ScreenHandler(int syncId, PlayerInventory playerInventory)
+    public Industry_crafting_table_ScreenHandler(int synId,PlayerInventory playerInventory)
     {
-        this(syncId, playerInventory, new SimpleInventory(10));
+        this(synId,playerInventory,new SimpleInventory(10));
     }
 
     public Industry_crafting_table_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory)

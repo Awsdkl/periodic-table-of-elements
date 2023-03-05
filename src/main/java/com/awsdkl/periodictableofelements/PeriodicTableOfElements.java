@@ -1,12 +1,14 @@
 package com.awsdkl.periodictableofelements;
 
-import com.awsdkl.periodictableofelements.block.Electrolysis_machine;
+import com.awsdkl.periodictableofelements.block.Electrolyzer_machine;
 import com.awsdkl.periodictableofelements.block.Industry_crafting_table;
-import com.awsdkl.periodictableofelements.block.entities.Electrolysis_machine_Entity;
+import com.awsdkl.periodictableofelements.block.entities.Electrolyzer_machine_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
 import com.awsdkl.periodictableofelements.client.recipes.Gas_tank_Recipes;
+import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Air_ICT_recipes;
+import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Blocks.Industry_crafting_table_ICT_recipes;
 import com.awsdkl.periodictableofelements.item.Gas_tank;
-import com.awsdkl.periodictableofelements.screen.handler.Electrolysis_machine_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
 import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -41,13 +43,13 @@ public class PeriodicTableOfElements implements ModInitializer {
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
     //Electrolysis_machine(电解装置)
-        public static final Electrolysis_machine ELECTROLYSIS_MACHINE = new Electrolysis_machine(FabricBlockSettings.of(Material.METAL));
-        public static final BlockItem ELECTROLYSIS_MACHINE_ITEM = new BlockItem(ELECTROLYSIS_MACHINE,new Item.Settings());
-        public static BlockEntityType<Electrolysis_machine_Entity> ELECTROLYSIS_MACHINE_ENTITY;
-        public static ScreenHandlerType<Electrolysis_machine_ScreenHandler> ELECTROLYSIS_MACHINE_SCREEN_HANDLER;
+        public static final Electrolyzer_machine ELECTROLYZER_MACHINE = new Electrolyzer_machine(FabricBlockSettings.of(Material.METAL));
+        public static final BlockItem ELECTROLYZER_MACHINE_ITEM = new BlockItem(ELECTROLYZER_MACHINE,new Item.Settings());
+        public static BlockEntityType<Electrolyzer_machine_Entity> ELECTROLYZER_MACHINE_ENTITY;
+        public static ScreenHandlerType<Electrolyzer_machine_ScreenHandler> ELECTROLYZER_MACHINE_SCREEN_HANDLER;
         static
         {
-            ELECTROLYSIS_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolysis_machine"), Electrolysis_machine_ScreenHandler::new);
+            ELECTROLYZER_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolyzer_machine"), Electrolyzer_machine_ScreenHandler::new);
         }
 
     //Industry_crafting_table(工业工作台)
@@ -76,12 +78,12 @@ public class PeriodicTableOfElements implements ModInitializer {
         }
         //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
         {
-            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE);
-            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"electrolysis_machine"),ELECTROLYSIS_MACHINE_ITEM);
-            ELECTROLYSIS_MACHINE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"electrolysis_machine"), FabricBlockEntityTypeBuilder.create(Electrolysis_machine_Entity::new,ELECTROLYSIS_MACHINE).build(null));
+            Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"electrolyzer_machine"),ELECTROLYZER_MACHINE);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"electrolyzer_machine"),ELECTROLYZER_MACHINE_ITEM);
+            ELECTROLYZER_MACHINE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"electrolyzer_machine"), FabricBlockEntityTypeBuilder.create(Electrolyzer_machine_Entity::new,ELECTROLYZER_MACHINE).build(null));
 
             Registry.register(Registries.BLOCK,new Identifier(NAMESPACE,"industry_crafting_table"),INDUSTRY_CRAFTING_TABLE);
-            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"industry_crafting_table"),INDUSTRY_CRAFTING_TABLE_ITEM);;
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"industry_crafting_table"),INDUSTRY_CRAFTING_TABLE_ITEM);
             INDUSTRY_CRAFTING_TABLE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,new Identifier(NAMESPACE,"industry_crafting_table"),FabricBlockEntityTypeBuilder.create(Industry_crafting_table_Entity::new,INDUSTRY_CRAFTING_TABLE).build(null));
         }
 
@@ -91,9 +93,13 @@ public class PeriodicTableOfElements implements ModInitializer {
             content.add(S_GAS_TANK);
             content.add(M_GAS_TANK);
             content.add(L_GAS_TANK);
-            content.add(ELECTROLYSIS_MACHINE_ITEM);
+            content.add(ELECTROLYZER_MACHINE_ITEM);
             content.add(INDUSTRY_CRAFTING_TABLE_ITEM);
         });
+
+        //添加工业工作台的配方
+        Industry_crafting_table_Entity.ict_recipes.add(0,new Air_ICT_recipes("air"));
+        Industry_crafting_table_Entity.addRecipes(new Industry_crafting_table_ICT_recipes());
     }
 
 }
