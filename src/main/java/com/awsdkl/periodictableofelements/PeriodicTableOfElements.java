@@ -42,7 +42,7 @@ public class PeriodicTableOfElements implements ModInitializer {
 
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
-    //Electrolysis_machine(电解装置)
+    //Electrolyzer_machine(电解装置)
         public static final Electrolyzer_machine ELECTROLYZER_MACHINE = new Electrolyzer_machine(FabricBlockSettings.of(Material.METAL));
         public static final BlockItem ELECTROLYZER_MACHINE_ITEM = new BlockItem(ELECTROLYZER_MACHINE,new Item.Settings());
         public static BlockEntityType<Electrolyzer_machine_Entity> ELECTROLYZER_MACHINE_ENTITY;

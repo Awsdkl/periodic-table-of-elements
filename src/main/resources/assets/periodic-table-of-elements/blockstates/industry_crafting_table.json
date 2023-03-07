@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "periodic-table-of-elements:block/industry_crafting_table","uvlock": true },
+    "facing=east":  { "model": "periodic-table-of-elements:block/industry_crafting_table", "y":  90, "uvlock": true },
+    "facing=south": { "model": "periodic-table-of-elements:block/industry_crafting_table", "y": 180, "uvlock": true },
+    "facing=west":  { "model": "periodic-table-of-elements:block/industry_crafting_table", "y": 270, "uvlock": true }
+  }
+}
