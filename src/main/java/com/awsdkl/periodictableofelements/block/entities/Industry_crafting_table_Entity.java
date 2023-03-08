@@ -135,8 +135,15 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
         int min = 999999999;
         for(int i = 0;i < 9;i++)
         {
-            min = Math.min(inventory.get(i).getCount(),min);
+            if(!inventory.get(i).isEmpty()) min = Math.min(inventory.get(i).getCount(),min);
         }
-        return min;
+        return min-1;
+    }
+
+    //这个函数用在此方块被破坏时
+    //当破坏时，则将输出物品栏中的物品设置为空
+    public static void beBreaking(Industry_crafting_table_Entity entity)
+    {
+        entity.inventory.set(9,ItemStack.EMPTY);
     }
 }

@@ -75,8 +75,9 @@ public class Industry_crafting_table extends BlockWithEntity
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof Industry_crafting_table_Entity) {
-                ItemScatterer.spawn(world, pos, (Industry_crafting_table_Entity)blockEntity);
+            if (blockEntity instanceof Industry_crafting_table_Entity blockEntity_this) {
+                blockEntity_this.beBreaking(blockEntity_this);//在这里将输出的物品栏设置为空，就可以让方块在破坏后不掉出这个物品栏中的东西
+                ItemScatterer.spawn(world, pos, blockEntity_this);
                 // 更新比较器
                 world.updateComparators(pos,this);
             }
