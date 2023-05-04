@@ -35,22 +35,24 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final RecipeSerializer<Gas_tank_Recipes> GAS_TANK_RECIPE = RecipeSerializer.register("gas_tank_recipe", new SpecialRecipeSerializer<>(Gas_tank_Recipes::new));
     //创建物品
     public static final Gas_tank S_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
-
     public static final Gas_tank M_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
-
     public static final Gas_tank L_GAS_TANK = new Gas_tank(new Item.Settings().maxCount(1));
+    public static final Item HAMMER = new Item(new Item.Settings().maxCount(1));
+    public static final Item SHEARS = new Item(new Item.Settings().maxCount(1));
+    public static final Item IRON_PLATE = new Item(new Item.Settings());
+    public static final Item TIN_PLATE = new Item(new Item.Settings());
 
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
     //Electrolyzer_machine(电解装置)
-        public static final Electrolyzer_machine ELECTROLYZER_MACHINE = new Electrolyzer_machine(FabricBlockSettings.of(Material.METAL));
-        public static final BlockItem ELECTROLYZER_MACHINE_ITEM = new BlockItem(ELECTROLYZER_MACHINE,new Item.Settings());
-        public static BlockEntityType<Electrolyzer_machine_Entity> ELECTROLYZER_MACHINE_ENTITY;
-        public static ScreenHandlerType<Electrolyzer_machine_ScreenHandler> ELECTROLYZER_MACHINE_SCREEN_HANDLER;
-        static
-        {
-            ELECTROLYZER_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolyzer_machine"), Electrolyzer_machine_ScreenHandler::new);
-        }
+    public static final Electrolyzer_machine ELECTROLYZER_MACHINE = new Electrolyzer_machine(FabricBlockSettings.of(Material.METAL));
+    public static final BlockItem ELECTROLYZER_MACHINE_ITEM = new BlockItem(ELECTROLYZER_MACHINE,new Item.Settings());
+    public static BlockEntityType<Electrolyzer_machine_Entity> ELECTROLYZER_MACHINE_ENTITY;
+    public static ScreenHandlerType<Electrolyzer_machine_ScreenHandler> ELECTROLYZER_MACHINE_SCREEN_HANDLER;
+    static
+    {
+        ELECTROLYZER_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolyzer_machine"), Electrolyzer_machine_ScreenHandler::new);
+    }
 
     //Industry_crafting_table(工业工作台)
         public static final Industry_crafting_table INDUSTRY_CRAFTING_TABLE = new Industry_crafting_table(FabricBlockSettings.of(Material.METAL));
@@ -64,17 +66,19 @@ public class PeriodicTableOfElements implements ModInitializer {
 
     //创建物品组
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE,"mod_group"))
-            .icon(() -> new ItemStack(PeriodicTableOfElements.S_GAS_TANK))
+            .icon(() -> new ItemStack(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ITEM))
             .build();
     @Override
     public void onInitialize() {
         //注册物品
         {
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"s_gas_tank"),S_GAS_TANK);
-
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"m_gas_tank"),M_GAS_TANK);
-
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"l_gas_tank"),L_GAS_TANK);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"shears"),SHEARS);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"hammer"),HAMMER);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"iron_plate"),IRON_PLATE);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"tin_plate"),TIN_PLATE);
         }
         //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
         {
@@ -95,6 +99,10 @@ public class PeriodicTableOfElements implements ModInitializer {
             content.add(L_GAS_TANK);
             content.add(ELECTROLYZER_MACHINE_ITEM);
             content.add(INDUSTRY_CRAFTING_TABLE_ITEM);
+            content.add(HAMMER);
+            content.add(SHEARS);
+            content.add(IRON_PLATE);
+            content.add(TIN_PLATE);
         });
 
         //添加工业工作台的配方
