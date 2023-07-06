@@ -100,17 +100,23 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
     DefaultedList<ItemStack> lst_inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
     public static void tick(Industry_crafting_table_Entity entity)
     {
+        //判断输入物品栏是否改变
         if(InventoryChange(entity.lst_inventory,entity.inventory))
         {
             entity.inventory.set(9,entity.getItemRecipe(entity.inventory).craft(entity.inventory));
         }
+        //如果输入物品栏没有改变，但是输出物品栏改变了，则判定为玩家制造了物品，则将输入物品栏中的物品每个减1
+        //此时还需要再将物品创建好
         else if(!entity.lst_inventory.get(9).isEmpty() && entity.inventory.get(9).isEmpty())
         {
             for(int i = 0;i < 9;i++)
             {
                 entity.inventory.get(i).decrement(1);
             }
+            entity.inventory.set(9,entity.getItemRecipe(entity.inventory).craft(entity.inventory));
         }
+
+        //将原inventory copy到lst_inventory
         entity.copyNowInvToLst();
     }
 
