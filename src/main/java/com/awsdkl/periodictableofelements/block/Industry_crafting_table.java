@@ -109,6 +109,11 @@ public class Industry_crafting_table extends BlockWithEntity
         //加入放置时的朝向，让此方块会有正面，侧面之分
         Direction dir = state.get(FACING);
         world.setBlockState(pos, state.with(FACING, dir));
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof Industry_crafting_table_Entity blockEntity_this)
+        {
+            blockEntity_this.bePlaced(blockEntity_this);
+        }
     }
 
     @Nullable

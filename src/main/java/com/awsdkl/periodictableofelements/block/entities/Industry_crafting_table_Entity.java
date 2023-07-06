@@ -12,7 +12,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 
 public class Industry_crafting_table_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
 {
-    DefaultedList<ItemStack> inventory = DefaultedList.ofSize(10,ItemStack.EMPTY);
+    DefaultedList<ItemStack> inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
     public static ArrayList<ICT_Recipe> ict_recipes = new ArrayList<>();
 
     public Industry_crafting_table_Entity(BlockPos pos, BlockState state) {
@@ -85,7 +84,7 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
         ict_recipes.add(recipe);
     }
 
-    public static ICT_Recipe getItemRecipe(DefaultedList<ItemStack> inventory)
+    public ICT_Recipe getItemRecipe(DefaultedList<ItemStack> inventory)
     {
         int len = ict_recipes.size();
         for(int i = 0;i < len;i++)
@@ -98,46 +97,42 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
         return new Air_ICT_recipes("air");
     }
 
-    DefaultedList<ItemStack> lst_inventory = inventory;
-    public ICT_Recipe item_stack;
+    DefaultedList<ItemStack> lst_inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
     public static void tick(Industry_crafting_table_Entity entity)
     {
-        if(entity.inventory.isEmpty())
+        if(InventoryChange(entity.lst_inventory,entity.inventory))
         {
-            entity.inventory.set(9,new ItemStack(Items.AIR));
-            return;
+            entity.inventory.set(9,entity.getItemRecipe(entity.inventory).craft(entity.inventory));
         }
-        if(entity.isInventoryParity(entity.inventory,entity.lst_inventory))
+        else if(!entity.lst_inventory.get(9).isEmpty() && entity.inventory.get(9).isEmpty())
         {
-            entity.lst_inventory = entity.inventory;
-            entity.item_stack = getItemRecipe(entity.inventory);
-            //System.out.println(0);
+            for(int i = 0;i < 9;i++)
+            {
+                entity.inventory.get(i).decrement(1);
+            }
         }
-        ICT_Recipe item_tack = entity.item_stack;
-        //System.out.println(item_tack.Name);
-
-        entity.inventory.set(9,new ItemStack(item_tack.craft(entity.inventory).getItem()));
-        entity.inventory.get(9).increment(entity.getCount(entity.inventory));
+        entity.copyNowInvToLst();
     }
 
-    private boolean isInventoryParity(DefaultedList<ItemStack> inventory,DefaultedList<ItemStack> inventory1)
+    private void copyNowInvToLst()
+    {
+        for(int i = 0;i < 10;i++)
+        {
+            lst_inventory.set(i,inventory.get(i).copy());
+        }
+    }
+
+    //用于检测输入物品栏中的物品是否改变（不包含物品个数）
+    private static boolean InventoryChange(DefaultedList<ItemStack> inventory, DefaultedList<ItemStack> inventory1)
     {
         for(int i = 0;i < 9;i++)
         {
-            if(inventory.get(i) != inventory1.get(i))
-                return false;
+            if(inventory.get(i).getItem() != inventory1.get(i).getItem())
+            {
+                return true;
+            }
         }
-        return true;
-    }
-
-    private int getCount(DefaultedList<ItemStack> inventory)
-    {
-        int min = 999999999;
-        for(int i = 0;i < 9;i++)
-        {
-            if(!inventory.get(i).isEmpty()) min = Math.min(inventory.get(i).getCount(),min);
-        }
-        return min-1;
+        return false;
     }
 
     //这个函数用在此方块被破坏时
@@ -145,5 +140,11 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
     public static void beBreaking(Industry_crafting_table_Entity entity)
     {
         entity.inventory.set(9,ItemStack.EMPTY);
+        entity.inventory.set(10,ItemStack.EMPTY);
+    }
+
+    public static void bePlaced(Industry_crafting_table_Entity entity)
+    {
+        entity.inventory.set(10,new ItemStack(PeriodicTableOfElements.TEST_FAN));
     }
 }

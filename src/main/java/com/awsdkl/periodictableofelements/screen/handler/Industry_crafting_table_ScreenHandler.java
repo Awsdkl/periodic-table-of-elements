@@ -15,14 +15,14 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
 
     public Industry_crafting_table_ScreenHandler(int synId,PlayerInventory playerInventory)
     {
-        this(synId,playerInventory,new SimpleInventory(10));
+        this(synId,playerInventory,new SimpleInventory(11));
     }
 
     public Industry_crafting_table_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory)
     {
         super(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER,syncId);
         this.inventory = inventory;
-        checkSize(this.inventory,10);
+        checkSize(this.inventory,11);
 
         //our inventory
         for(int i = 0;i < 3;i++)
@@ -47,8 +47,19 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
             {
                 return false;
             }
-
-
+        });
+        this.addSlot(new Slot(this.inventory,10,152,64)
+        {
+            @Override
+            public boolean canInsert(ItemStack stack)
+            {
+                return false;
+            }
+            @Override
+            public boolean canTakeItems(PlayerEntity playerEntity)
+            {
+                return false;
+            }
         });
 
         for(int i = 0;i < 3;i++)

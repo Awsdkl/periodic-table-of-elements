@@ -41,6 +41,7 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final Item SHEARS = new Item(new Item.Settings().maxCount(1));
     public static final Item IRON_PLATE = new Item(new Item.Settings());
     public static final Item TIN_PLATE = new Item(new Item.Settings());
+    public static final Item TEST_FAN = new Item(new Item.Settings().maxCount(1));
 
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
@@ -79,6 +80,7 @@ public class PeriodicTableOfElements implements ModInitializer {
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"hammer"),HAMMER);
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"iron_plate"),IRON_PLATE);
             Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"tin_plate"),TIN_PLATE);
+            Registry.register(Registries.ITEM,new Identifier(NAMESPACE,"test_fan"),TEST_FAN);
         }
         //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
         {
