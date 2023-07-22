@@ -9,48 +9,40 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
-
+public class Generator_ScreenHandler extends ScreenHandler
+{
     public Inventory inventory;
-
-    public Industry_crafting_table_ScreenHandler(int synId,PlayerInventory playerInventory)
+    public Generator_ScreenHandler(int synId, PlayerInventory playerInventory)
     {
-        this(synId,playerInventory,new SimpleInventory(11));
+        this(synId,playerInventory,new SimpleInventory(3));
     }
 
-    public Industry_crafting_table_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
+    public Generator_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
     {
-        super(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER,synId);
+        super(PeriodicTableOfElements.GENERATOR_SCREEN_HANDLER,synId);
         this.inventory = inventory;
-        checkSize(this.inventory,11);
+        checkSize(this.inventory,3);
 
         //our inventory
-        for(int i = 0;i < 3;i++)
-        {
-            for(int j = 0;j < 3;j++)
-            {
-                this.addSlot(new Slot(this.inventory,i*3+j,29+18*j,19+18*i)
-                {
-                    @Override
-                    public boolean canInsert(ItemStack stack)
-                    {
-                        return true;
-                    }
-                });
-            }
-        }
-
-        this.addSlot(new Slot(this.inventory,9,125,37)
+        this.addSlot(new Slot(this.inventory,0,56,17)
         {
             @Override
             public boolean canInsert(ItemStack stack)
             {
-                return false;
+                return true;
+            }
+        });
+        this.addSlot(new Slot(this.inventory,1,56,53)
+        {
+            @Override
+            public boolean canInsert(ItemStack stack)
+            {
+                return true;
             }
         });
 
         //the inventory for test fan
-        this.addSlot(new Slot(this.inventory,10,152,64)
+        this.addSlot(new Slot(this.inventory,2,152,64)
         {
             @Override
             public boolean canInsert(ItemStack stack)
@@ -78,14 +70,6 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
         }
     }
 
-
-
-    @Override
-    public boolean canUse(PlayerEntity player)
-    {
-        return this.inventory.canPlayerUse(player);
-    }
-
     //shift + 左键点击物品
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot)
@@ -111,5 +95,11 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
         }
 
         return newStack;
+    }
+
+    @Override
+    public boolean canUse(PlayerEntity player)
+    {
+        return this.inventory.canPlayerUse(player);
     }
 }

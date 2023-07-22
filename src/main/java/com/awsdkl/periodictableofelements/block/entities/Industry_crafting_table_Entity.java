@@ -149,7 +149,7 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
         entity.inventory.set(10,ItemStack.EMPTY);
     }
 
-    public static void bePlaced(Industry_crafting_table_Entity entity)
+    public static void bePlacing(Industry_crafting_table_Entity entity)
     {
         entity.inventory.set(10,new ItemStack(PeriodicTableOfElements.TEST_FAN));
     }

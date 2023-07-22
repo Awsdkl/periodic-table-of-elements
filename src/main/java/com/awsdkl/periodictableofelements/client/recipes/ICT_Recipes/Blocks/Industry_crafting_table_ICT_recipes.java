@@ -18,15 +18,16 @@ public class Industry_crafting_table_ICT_recipes extends ICT_Recipe
     @Override
     public boolean matches(DefaultedList<ItemStack> inventory)
     {
-        if(inventory.isEmpty() || inventory.get(0).getItem() != Items.IRON_BLOCK) return false;
-        if(inventory.isEmpty() || inventory.get(1).getItem() != Items.IRON_BLOCK) return false;
-        if(inventory.isEmpty() || inventory.get(2).getItem() != Items.IRON_BLOCK) return false;
-        if(inventory.get(3).getItem() != Items.AIR) return false;
-        if(inventory.isEmpty() || inventory.get(4).getItem() != Items.CRAFTING_TABLE) return false;
-        if(inventory.get(5).getItem() != Items.AIR) return false;
-        if(inventory.isEmpty() || !Type_of_Item.isPlank(inventory.get(6).getItem())) return false;
-        if(inventory.isEmpty() || !Type_of_Item.isPlank(inventory.get(7).getItem())) return false;
-        return !inventory.isEmpty() && Type_of_Item.isPlank(inventory.get(8).getItem());
+        if(inventory.isEmpty()) return false;
+        if(inventory.get(0).getItem() != Items.IRON_BLOCK) return false;
+        if(inventory.get(1).getItem() != Items.IRON_BLOCK) return false;
+        if(inventory.get(2).getItem() != Items.IRON_BLOCK) return false;
+        if(inventory.get(3).getItem() != PeriodicTableOfElements.HAMMER) return false;
+        if(inventory.get(4).getItem() != Items.CRAFTING_TABLE) return false;
+        if(inventory.get(5).getItem() != PeriodicTableOfElements.SHEARS) return false;
+        if(!Type_of_Item.isPlank(inventory.get(6).getItem())) return false;
+        if(!Type_of_Item.isPlank(inventory.get(7).getItem())) return false;
+        return Type_of_Item.isPlank(inventory.get(8).getItem());
     }
 
     @Override

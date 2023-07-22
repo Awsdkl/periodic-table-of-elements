@@ -1,12 +1,12 @@
 {
   "parent": "block/block",
   "textures": {
-    "0": "periodic-table-of-elements:block/machine/electrolyzer/top",
-    "1": "periodic-table-of-elements:block/machine/electrolyzer/bottom",
-    "2": "periodic-table-of-elements:block/machine/electrolyzer/front",
-    "3": "periodic-table-of-elements:block/machine/electrolyzer/side",
-    "4": "periodic-table-of-elements:block/machine/electrolyzer/back",
-    "particle": "periodic-table-of-elements:block/machine/electrolyzer/bottom"
+    "0": "periodic-table-of-elements:block/machine/generator/bottom",
+    "1": "periodic-table-of-elements:block/machine/generator/bottom",
+    "2": "periodic-table-of-elements:block/machine/generator/front",
+    "3": "periodic-table-of-elements:block/machine/generator/side",
+    "4": "periodic-table-of-elements:block/machine/generator/side",
+    "particle": "periodic-table-of-elements:block/machine/generator/bottom"
   },
   "elements": [
     {

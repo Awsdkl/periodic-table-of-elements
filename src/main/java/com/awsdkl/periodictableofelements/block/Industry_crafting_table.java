@@ -112,7 +112,7 @@ public class Industry_crafting_table extends BlockWithEntity
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof Industry_crafting_table_Entity blockEntity_this)
         {
-            blockEntity_this.bePlaced(blockEntity_this);
+            blockEntity_this.bePlacing(blockEntity_this);
         }
     }
 

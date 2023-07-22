@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+    [
+      "III",
+      "HCS",
+      "AAA"
+    ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "C":
+    {
+      "item": "minecraft:crafting_table"
+    },
+    "H":
+    {
+      "item": "periodic-table-of-elements:hammer"
+    },
+    "S":
+    {
+      "item": "periodic-table-of-elements:shears"
+    },
+    "A":
+    {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result":
+  {
+    "item": "periodic-table-of-elements:industry_crafting_table",
+    "count": 1
+  }
+}

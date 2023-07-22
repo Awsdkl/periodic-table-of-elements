@@ -76,4 +76,9 @@ public class Electrolyzer_machine_Entity extends BlockEntity implements Implemen
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
     }
+
+    public void beBreaking(Electrolyzer_machine_Entity entity)
+    {
+        entity.inventory.set(2,ItemStack.EMPTY);
+    }
 }
