@@ -79,6 +79,6 @@ public class Electrolyzer_machine_Entity extends BlockEntity implements Implemen
 
     public void beBreaking(Electrolyzer_machine_Entity entity)
     {
-        entity.inventory.set(2,ItemStack.EMPTY);
+        entity.inventory.set(1,ItemStack.EMPTY);
     }
 }

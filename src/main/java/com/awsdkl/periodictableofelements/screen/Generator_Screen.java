@@ -85,8 +85,8 @@ public class Generator_Screen extends HandledScreen<Generator_ScreenHandler>
     }
 
     @Override
-    public boolean changeFocus(boolean lookForwards)
+    public boolean isFocused()
     {
-        return super.changeFocus(lookForwards);
+        return super.isFocused();
     }
 }

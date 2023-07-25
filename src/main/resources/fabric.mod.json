@@ -11,7 +11,7 @@
     "repo": "https://github.com/Awsdkl/periodic-table-of-elements"
   },
   "license": "MIT",
-  "icon": "assets/periodic-table-of-elements/icon.png",
+  "icon": "assets/periodic-table-of-elements/textures/item/test_fan.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -27,6 +27,6 @@
   "depends": {
     "fabricloader": ">=0.14.13",
     "fabric": "*",
-    "minecraft": "1.19.3"
+    "minecraft": "1.19.4"
   }
 }

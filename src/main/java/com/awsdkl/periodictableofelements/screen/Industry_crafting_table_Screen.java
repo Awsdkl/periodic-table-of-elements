@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public class Industry_crafting_table_Screen extends HandledScreen<Industry_crafting_table_ScreenHandler>
 {
-    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE, "textures/gui/Industry_crafting_table_gui.png");
+    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE, "textures/gui/industry_crafting_table_gui.png");
     public Industry_crafting_table_Screen(Industry_crafting_table_ScreenHandler handler, PlayerInventory inventory, Text title)
     {
         super(handler, inventory, title);
