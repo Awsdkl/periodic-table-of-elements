@@ -13,5 +13,11 @@
   "item.periodic-table-of-elements.shears": "工业剪刀",
   "item.periodic-table-of-elements.test_fan": "小风扇",
   "item.periodic-table-of-elements.tin_plate": "锡板",
-  "itemGroup.periodic-table-of-elements.mod_group": "元素周期表"
+  "itemGroup.periodic-table-of-elements.mod_group": "元素周期表",
+  "item.periodic-table-of-elements.battery.tooltip_1": "剩余电量：%d %%",
+  "item.periodic-table-of-elements:tin_raw": "粗锡",
+  "item.periodic-table-of-elements:tin_ingot": "锡锭",
+  "block.periodic-table-of-elements.tin_raw_block": "粗锡块",
+  "block.periodic-table-of-elements.tin_ore": "锡矿石",
+  "block.periodic-table-of-elements.deepslate_tin_ore": "深层锡矿石"
 }

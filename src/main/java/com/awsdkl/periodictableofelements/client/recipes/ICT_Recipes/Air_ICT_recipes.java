@@ -6,16 +6,15 @@ import net.minecraft.util.collection.DefaultedList;
 
 public class Air_ICT_recipes extends ICT_Recipe
 {
-    public Air_ICT_recipes(String name)
+    public Air_ICT_recipes()
     {
-        super(name);
+        super("air");
     }
 
     @Override
     public boolean matches(DefaultedList<ItemStack> inventory)
     {
-        if(inventory.isEmpty()) return true;
-        return false;
+        return inventory.isEmpty();
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.awsdkl.periodictableofelements.block.entities;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedInventory;
-import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Air_ICT_recipes;
+import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.GetRecipe;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.ICT_Recipe;
 import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
 import net.minecraft.block.BlockState;
@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
@@ -21,12 +22,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-
 public class Industry_crafting_table_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
 {
     DefaultedList<ItemStack> inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
-    public static ArrayList<ICT_Recipe> ict_recipes = new ArrayList<>();
+    public static ICT_Recipe[] ict_shaped_recipes = new ICT_Recipe[6+5];
+    public static int ict_shaped_recipes_len = -1;//上面这个数组的长度
+
+    public static ICT_Recipe[] ict_shapeless_recipes = new ICT_Recipe[1+5];
+    public static int ict_shapeless_recipes_len = -1;
 
     public Industry_crafting_table_Entity(BlockPos pos, BlockState state) {
         super(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ENTITY, pos, state);
@@ -79,41 +82,50 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
         Inventories.writeNbt(nbt, this.inventory);
     }
 
-    public static void addRecipes(ICT_Recipe recipe)
+    public static void addShapedRecipes(ICT_Recipe recipe)
     {
-        ict_recipes.add(recipe);
+        //向有序物品合成配方数组添加一个合成配方
+        ict_shaped_recipes[++ict_shaped_recipes_len] = recipe;
     }
 
-    public ICT_Recipe getItemRecipe(DefaultedList<ItemStack> inventory)
+    public static void addShapelessRecipes(ICT_Recipe recipe)
     {
-        int len = ict_recipes.size();
-        for(int i = 0;i < len;i++)
-        {
-            if(ict_recipes.get(i).matches(inventory))
-            {
-                return ict_recipes.get(i);
-            }
-        }
-        return new Air_ICT_recipes("air");
+        //向无序物品合成配方数组添加一个合成配方
+        ict_shapeless_recipes[++ict_shapeless_recipes_len] = recipe;
     }
 
     DefaultedList<ItemStack> lst_inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
     public static void tick(Industry_crafting_table_Entity entity)
     {
+        ItemStack c_stack = new ItemStack(Items.AIR);
         //判断输入物品栏是否改变
         if(InventoryChange(entity.lst_inventory,entity.inventory))
         {
-            entity.inventory.set(9,entity.getItemRecipe(entity.inventory).craft(entity.inventory));
+            int r_id = GetRecipe.getShapedRecipe(entity.inventory);//当前物品应该造出的东西在ict_shaped_recipes或ict_shapeless_recipes数组中的下标
+            if(r_id > 0) c_stack = ict_shaped_recipes[r_id].craft(entity.inventory);//大于0表示在有序的中找到了物品
+            else//表示没有找到物品，要去无序中找
+            {
+                r_id = GetRecipe.getShapelessRecipe(entity.inventory);
+                if(r_id > 0) c_stack = ict_shapeless_recipes[r_id].craft(entity.inventory);
+            }
+            entity.inventory.set(9, c_stack);
         }
         //如果输入物品栏没有改变，但是输出物品栏改变了，则判定为玩家制造了物品，则将输入物品栏中的物品每个减1
         //此时还需要再将物品创建好
         else if(!entity.lst_inventory.get(9).isEmpty() && entity.inventory.get(9).isEmpty())
         {
-            for(int i = 0;i < 9;i++)
+            for(int i = 0; i < 9; i++)//这个循环中将输入物品栏的每个物品减1
             {
                 entity.inventory.get(i).decrement(1);
             }
-            entity.inventory.set(9,entity.getItemRecipe(entity.inventory).craft(entity.inventory));
+            int r_id = GetRecipe.getShapedRecipe(entity.inventory);//当前物品应该造出的东西在ict_shaped_recipes或ict_shapeless_recipes数组中的下标
+            if(r_id > 0) c_stack = ict_shaped_recipes[r_id].craft(entity.inventory);//大于0表示在有序的中找到了物品
+            else//表示没有找到物品，要去无序中找
+            {
+                r_id = GetRecipe.getShapelessRecipe(entity.inventory);
+                if(r_id > 0) c_stack = ict_shapeless_recipes[r_id].craft(entity.inventory);
+            }
+            entity.inventory.set(9, c_stack);
         }
 
         //将原inventory copy到lst_inventory

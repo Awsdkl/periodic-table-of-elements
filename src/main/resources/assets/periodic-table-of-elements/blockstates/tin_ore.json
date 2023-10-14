@@ -1,0 +1,7 @@
+{
+  "variants":
+  {
+    "": {"model": "periodic-table-of-elements:block/tin_ore","uvlock": true}
+  }
+}
+

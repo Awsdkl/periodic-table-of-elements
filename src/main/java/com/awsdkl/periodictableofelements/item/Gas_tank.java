@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -34,9 +35,9 @@ public class Gas_tank extends Item
             case 3:Smodel = "Large";
         }
 
-        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_1",Smodel));
-        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_2",used / 1000f,model * 1000f));
-        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_3",type));
+        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_1",Smodel).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_2",used / 1000f,model * 1000f).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.periodic-table-of-elements.gas_tank_item.tooltip_3",type).formatted(Formatting.GRAY));
     }
 
     @Override

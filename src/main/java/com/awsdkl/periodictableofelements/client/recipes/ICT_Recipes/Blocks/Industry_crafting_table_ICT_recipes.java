@@ -33,7 +33,7 @@ public class Industry_crafting_table_ICT_recipes extends ICT_Recipe
     @Override
     public ItemStack craft(DefaultedList<ItemStack> inventory)
     {
-        return new ItemStack(new PeriodicTableOfElements().INDUSTRY_CRAFTING_TABLE_ITEM);
+        return new ItemStack(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ITEM);
     }
 
 }

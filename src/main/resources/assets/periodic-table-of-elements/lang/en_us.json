@@ -13,5 +13,11 @@
   "item.periodic-table-of-elements.shears": "Shears",
   "item.periodic-table-of-elements.test_fan": "Test Fan",
   "item.periodic-table-of-elements.tin_plate": "Tin Plate",
-  "itemGroup.periodic-table-of-elements.mod_group": "Periodic Table of Elements"
+  "itemGroup.periodic-table-of-elements.mod_group": "Periodic Table of Elements",
+  "item.periodic-table-of-elements.battery.tooltip_1": "剩余电量：%d %%",
+  "item.periodic-table-of-elements:tin_raw": "Raw Tin",
+  "item.periodic-table-of-elements:tin_ingot": "Tin Ingot",
+  "block.periodic-table-of-elements.tin_raw_block": "Block of Tin Ingot",
+  "block.periodic-table-of-elements.tin_ore": "Tin Ore",
+  "block.periodic-table-of-elements.deepslate_tin_ore": "Deepslate Iron Ore"
 }
