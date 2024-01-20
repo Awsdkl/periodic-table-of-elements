@@ -1,7 +1,7 @@
-package com.awsdkl.periodictableofelements.screen;
+package com.awsdkl.periodictableofelements.screen.screen;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Generator_ScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -10,11 +10,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Electrolyzer_machine_Screen extends HandledScreen<Electrolyzer_machine_ScreenHandler>
+public class Generator_Screen extends HandledScreen<Generator_ScreenHandler>
 {
-    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE,"textures/gui/electrolyzer_machine_gui.png");
-
-    public Electrolyzer_machine_Screen(Electrolyzer_machine_ScreenHandler handler, PlayerInventory inventory, Text title)
+    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE, "textures/gui/generator_gui.png");
+    public Generator_Screen(Generator_ScreenHandler handler, PlayerInventory inventory, Text title)
     {
         super(handler, inventory, title);
         this.passEvents = false;
@@ -26,9 +25,9 @@ public class Electrolyzer_machine_Screen extends HandledScreen<Electrolyzer_mach
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
     {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1.0f,1.0f,1.0f,1.0f);
-        RenderSystem.setShaderTexture(0,TEXTURE);
-        this.drawTexture(matrices,this.x,this.y,0,0,this.backgroundWidth,this.backgroundHeight);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        drawTexture(matrices,this.x,this.y,0,0,this.backgroundWidth,this.backgroundHeight);
     }
 
     @Override
@@ -36,6 +35,6 @@ public class Electrolyzer_machine_Screen extends HandledScreen<Electrolyzer_mach
     {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(matrices,mouseX,mouseY);
+        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
 }

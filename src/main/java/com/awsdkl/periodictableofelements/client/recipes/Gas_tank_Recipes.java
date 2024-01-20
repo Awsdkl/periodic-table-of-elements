@@ -27,17 +27,16 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
         for(int i = 0;i < inventory.size();i++)
         {
             ItemStack stack = inventory.getStack(i);
-            if(!stack.isEmpty())
+
+            if(stack.isEmpty()) return false;
+
+            if(i == 4)
             {
-                if(i == 4)
-                {
-                    if(stack.getItem() == Items.LEATHER) list.add(stack);
-                    if(stack.getItem() == PeriodicTableOfElements.S_GAS_TANK) list.add(stack);
-                    if(stack.getItem() == PeriodicTableOfElements.M_GAS_TANK) list.add(stack);
-                }
-                else if(stack.getItem() == Items.IRON_INGOT) list.add(stack);
+                if(stack.getItem() == Items.LEATHER) list.add(stack);
+                if(stack.getItem() == PeriodicTableOfElements.S_GAS_TANK) list.add(stack);
+                if(stack.getItem() == PeriodicTableOfElements.M_GAS_TANK) list.add(stack);
             }
-            else return false;
+            else if(stack.getItem() == Items.IRON_INGOT) list.add(stack);
         }
         return list.size() == 9;
     }
@@ -51,16 +50,15 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
         for(int i = 0;i < inventory.size();i++)
         {
             ItemStack stack = inventory.getStack(i);
-            if(!stack.isEmpty())
+
+            if(stack.isEmpty()) return ItemStack.EMPTY;
+
+            if(stack.getItem() == Items.IRON_INGOT) count++;
+            else if(i == 4)
             {
-                if(stack.getItem() == Items.IRON_INGOT) count++;
-                else if(i == 4)
-                {
-                    hasLeather = stack.getItem() == Items.LEATHER;
-                    hasS_Gas_tank = stack.getItem() == PeriodicTableOfElements.S_GAS_TANK;
-                    hasM_Gas_tank = stack.getItem() == PeriodicTableOfElements.M_GAS_TANK;
-                }
-                else return ItemStack.EMPTY;
+                hasLeather = stack.getItem() == Items.LEATHER;
+                hasS_Gas_tank = stack.getItem() == PeriodicTableOfElements.S_GAS_TANK;
+                hasM_Gas_tank = stack.getItem() == PeriodicTableOfElements.M_GAS_TANK;
             }
             else return ItemStack.EMPTY;
         }

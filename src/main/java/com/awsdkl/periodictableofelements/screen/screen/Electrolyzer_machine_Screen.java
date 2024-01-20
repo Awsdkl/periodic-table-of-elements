@@ -1,8 +1,9 @@
-package com.awsdkl.periodictableofelements.screen;
+package com.awsdkl.periodictableofelements.screen.screen;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
+import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -10,10 +11,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Industry_crafting_table_Screen extends HandledScreen<Industry_crafting_table_ScreenHandler>
+public class Electrolyzer_machine_Screen extends HandledScreen<Electrolyzer_machine_ScreenHandler>
 {
-    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE, "textures/gui/industry_crafting_table_gui.png");
-    public Industry_crafting_table_Screen(Industry_crafting_table_ScreenHandler handler, PlayerInventory inventory, Text title)
+    private static final Identifier TEXTURE = new Identifier(PeriodicTableOfElements.NAMESPACE,"textures/gui/electrolyzer_machine_gui.png");
+
+    public Electrolyzer_machine_Screen(Electrolyzer_machine_ScreenHandler handler, PlayerInventory inventory, Text title)
     {
         super(handler, inventory, title);
         this.passEvents = false;
@@ -25,9 +27,9 @@ public class Industry_crafting_table_Screen extends HandledScreen<Industry_craft
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
     {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        this.drawTexture(matrices,this.x,this.y,0,0,this.backgroundWidth,this.backgroundHeight);
+        RenderSystem.setShaderColor(1.0f,1.0f,1.0f,1.0f);
+        RenderSystem.setShaderTexture(0,TEXTURE);
+        drawTexture(matrices,this.x,this.y,0,0,this.backgroundWidth,this.backgroundHeight);
     }
 
     @Override
@@ -35,6 +37,6 @@ public class Industry_crafting_table_Screen extends HandledScreen<Industry_craft
     {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+        this.drawMouseoverTooltip(matrices,mouseX,mouseY);
     }
 }

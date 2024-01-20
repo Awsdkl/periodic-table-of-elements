@@ -5,6 +5,7 @@ import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedIn
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.GetRecipe;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.ICT_Recipe;
 import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,15 +15,16 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class Industry_crafting_table_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
+public class Industry_crafting_table_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, ExtendedScreenHandlerFactory
 {
     DefaultedList<ItemStack> inventory = DefaultedList.ofSize(11,ItemStack.EMPTY);
     public static ICT_Recipe[] ict_shaped_recipes = new ICT_Recipe[6+5];
@@ -164,5 +166,11 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
     public static void bePlacing(Industry_crafting_table_Entity entity)
     {
         entity.inventory.set(10,new ItemStack(PeriodicTableOfElements.TEST_FAN));
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf)
+    {
+        buf.writeBlockPos(pos);
     }
 }

@@ -6,15 +6,19 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 
 public class Generator_ScreenHandler extends ScreenHandler
 {
+    public BlockPos pos;
     public Inventory inventory;
-    public Generator_ScreenHandler(int synId, PlayerInventory playerInventory)
+    public Generator_ScreenHandler(int synId, PlayerInventory playerInventory, PacketByteBuf buf)
     {
         this(synId,playerInventory,new SimpleInventory(3));
+        pos = buf.readBlockPos();
     }
 
     public Generator_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
@@ -68,6 +72,8 @@ public class Generator_ScreenHandler extends ScreenHandler
         {
             this.addSlot(new Slot(playerInventory,i,8 + i * 18,142));
         }
+
+        pos = BlockPos.ORIGIN;
     }
 
     //shift + 左键点击物品

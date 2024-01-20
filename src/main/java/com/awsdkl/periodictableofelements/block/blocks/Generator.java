@@ -1,5 +1,6 @@
-package com.awsdkl.periodictableofelements.block;
+package com.awsdkl.periodictableofelements.block.blocks;
 //火力发电机_方块类
+
 import com.awsdkl.periodictableofelements.block.entities.Generator_Entity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -12,7 +13,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -22,16 +22,14 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockRenderView;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.listener.GameEventListener;
 import org.jetbrains.annotations.Nullable;
 
 public class Generator extends BlockWithEntity
 {
-    //为了让此方块在被创造时会面向玩家
+    /**为了让此方块在被创造时面向玩家*/
     public static final DirectionProperty FACING;
     static
     {
@@ -75,7 +73,7 @@ public class Generator extends BlockWithEntity
     {
         if(!world.isClient)
         {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            NamedScreenHandlerFactory screenHandlerFactory =  state.createScreenHandlerFactory(world, pos);
             if(screenHandlerFactory != null)
             {
                 player.openHandledScreen(screenHandlerFactory);
@@ -85,7 +83,9 @@ public class Generator extends BlockWithEntity
         return ActionResult.SUCCESS;
     }
 
-    // 这个方法能让方块破坏时物品全部掉落
+ /**
+ * 这个方法能让方块破坏时物品全部掉落
+ */
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -97,22 +97,6 @@ public class Generator extends BlockWithEntity
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
-    }
-
-    @Override
-    public boolean hasComparatorOutput(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
-    {
-        return super.getCollisionShape(state, world, pos, context);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {

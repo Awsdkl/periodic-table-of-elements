@@ -6,16 +6,20 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 
-public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
-
+public class Industry_crafting_table_ScreenHandler extends ScreenHandler
+{
+    public BlockPos pos;
     public Inventory inventory;
 
-    public Industry_crafting_table_ScreenHandler(int synId,PlayerInventory playerInventory)
+    public Industry_crafting_table_ScreenHandler(int synId, PlayerInventory playerInventory, PacketByteBuf buf)
     {
         this(synId,playerInventory,new SimpleInventory(11));
+        pos = buf.readBlockPos();
     }
 
     public Industry_crafting_table_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
@@ -76,6 +80,8 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
         {
             this.addSlot(new Slot(playerInventory,i,8 + i * 18,142));
         }
+
+        pos = BlockPos.ORIGIN;
     }
 
 
@@ -92,20 +98,28 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler {
     {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
-        if (slot != null && slot.hasStack()) {
+        if (slot != null && slot.hasStack())
+        {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-            if (invSlot < this.inventory.size()) {
-                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+            if (invSlot < this.inventory.size())
+            {
+                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true))
+                {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+            }
+            else if (!this.insertItem(originalStack, 0, this.inventory.size(), false))
+            {
                 return ItemStack.EMPTY;
             }
 
-            if (originalStack.isEmpty()) {
+            if (originalStack.isEmpty())
+            {
                 slot.setStack(ItemStack.EMPTY);
-            } else {
+            }
+            else
+            {
                 slot.markDirty();
             }
         }

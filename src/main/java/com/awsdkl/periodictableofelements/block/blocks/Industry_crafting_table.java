@@ -1,4 +1,4 @@
-package com.awsdkl.periodictableofelements.block;
+package com.awsdkl.periodictableofelements.block.blocks;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
