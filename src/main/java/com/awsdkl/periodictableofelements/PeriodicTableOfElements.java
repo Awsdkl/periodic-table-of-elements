@@ -1,8 +1,10 @@
 package com.awsdkl.periodictableofelements;
 
-import com.awsdkl.periodictableofelements.block.Electrolyzer_machine;
-import com.awsdkl.periodictableofelements.block.Generator;
-import com.awsdkl.periodictableofelements.block.Industry_crafting_table;
+import com.awsdkl.periodictableofelements.block.blocks.Copper_cable;
+import com.awsdkl.periodictableofelements.block.blocks.Electrolyzer_machine;
+import com.awsdkl.periodictableofelements.block.blocks.Generator;
+import com.awsdkl.periodictableofelements.block.blocks.Industry_crafting_table;
+import com.awsdkl.periodictableofelements.block.entities.Copper_cable_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Electrolyzer_machine_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Generator_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
@@ -24,7 +26,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
@@ -68,6 +70,10 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final Item TIN_RAW = new Item(new Item.Settings());
     //锡锭
     public static final Item TIN_INGOT = new Item(new Item.Settings());
+    //铜板
+    public static final Item COPPER_PLATE = new Item(new Item.Settings());
+    //铜线
+    public static final Item COPPER_WIRE = new Item(new Item.Settings());
 
     //创建方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
@@ -79,7 +85,7 @@ public class PeriodicTableOfElements implements ModInitializer {
 
     static
     {
-        ELECTROLYZER_MACHINE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "electrolyzer_machine"), Electrolyzer_machine_ScreenHandler::new);
+        ELECTROLYZER_MACHINE_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER,new Identifier(NAMESPACE, "electrolyzer_machine"), new ExtendedScreenHandlerType<>(Electrolyzer_machine_ScreenHandler::new));
     }
 
     //Industry_crafting_table(工业工作台)
@@ -90,7 +96,7 @@ public class PeriodicTableOfElements implements ModInitializer {
 
     static
     {
-        INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "industry_crafting_table"), Industry_crafting_table_ScreenHandler::new);
+        INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, new Identifier(NAMESPACE, "industry_crafting_table"), new ExtendedScreenHandlerType<>(Industry_crafting_table_ScreenHandler::new));
     }
 
     //Generator(火力发电机)
@@ -98,11 +104,15 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final BlockItem GENERATOR_ITEM = new BlockItem(GENERATOR, new Item.Settings());
     public static BlockEntityType<Generator_Entity> GENERATOR_ENTITY;
     public static ScreenHandlerType<Generator_ScreenHandler> GENERATOR_SCREEN_HANDLER;
-
     static
     {
-        GENERATOR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(NAMESPACE, "generator"), Generator_ScreenHandler::new);
+        GENERATOR_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, new Identifier(NAMESPACE,"generator"), new ExtendedScreenHandlerType<>(Generator_ScreenHandler::new));
     }
+
+    //Copper_cable(铜制线缆)
+    public static final Copper_cable COPPER_CABLE = new Copper_cable(FabricBlockSettings.of(Material.METAL));
+    public static final BlockItem COPPER_CABLE_ITEM = new BlockItem(COPPER_CABLE, new Item.Settings());
+    public static BlockEntityType<Copper_cable_Entity> COPPER_CABLE_ENTITY;
 
     //tin_ore(锡矿石)
     public static final Block TIN_ORE = new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F));
@@ -120,6 +130,14 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE, "mod_group"))
             .icon(() -> new ItemStack(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ITEM))
             .build();
+    //元素周期表 自然方块(PTOE Natural Blocks)物品组
+    public static final ItemGroup PTOE_NATURAL_BLOCKS = FabricItemGroup.builder(new Identifier(NAMESPACE,"ptoe_natural_blocks"))
+            .icon(() -> new ItemStack(PeriodicTableOfElements.TIN_ORE))
+            .build();
+    //元素周期表 原材料(PTOE Ingredients)物品组
+    public static final ItemGroup PTOE_INGREDIENTS = FabricItemGroup.builder(new Identifier(NAMESPACE,"ptoe_ingredients"))
+            .icon(() -> new ItemStack(PeriodicTableOfElements.TIN_INGOT))
+            .build();
 
     @Override
     public void onInitialize()
@@ -136,7 +154,8 @@ public class PeriodicTableOfElements implements ModInitializer {
         Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "battery"),BATTERY);
         Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "tin_raw"),TIN_RAW);
         Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "tin_ingot"),TIN_INGOT);
-        
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "copper_plate"),COPPER_PLATE);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "copper_wire"), COPPER_WIRE);
 
         //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
 
@@ -152,6 +171,10 @@ public class PeriodicTableOfElements implements ModInitializer {
         Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "generator"), GENERATOR);
         Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "generator"), GENERATOR_ITEM);
         GENERATOR_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(NAMESPACE, "generator"), FabricBlockEntityTypeBuilder.create(Generator_Entity::new, GENERATOR).build(null));
+        //copper_cable(铜质线缆)
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "copper_cable"), COPPER_CABLE);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "copper_cable"), COPPER_CABLE_ITEM);
+        COPPER_CABLE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(NAMESPACE, "copper_cable"), FabricBlockEntityTypeBuilder.create(Copper_cable_Entity::new, COPPER_CABLE).build(null));
 
         //tin_ore(锡矿石)
         Registry.register(Registries.BLOCK, new Identifier(NAMESPACE,"tin_ore"), TIN_ORE);
@@ -180,6 +203,21 @@ public class PeriodicTableOfElements implements ModInitializer {
             content.add(BATTERY);
             content.add(TIN_ORE_ITEM);
             content.add(TIN_RAW);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(PTOE_NATURAL_BLOCKS).register(content ->
+        {
+            content.add(TIN_ORE);
+            content.add(DEEPSLATE_TIN_ORE);
+
+            content.add(TIN_RAW_BLOCK);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(PTOE_INGREDIENTS).register(content ->
+        {
+            content.add(TIN_RAW);
+
+            content.add(TIN_INGOT);
         });
 
         //添加工业工作台的配方

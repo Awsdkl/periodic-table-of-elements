@@ -3,6 +3,7 @@ package com.awsdkl.periodictableofelements.block.entities;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedInventory;
 import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,15 +12,16 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class Electrolyzer_machine_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory
+public class Electrolyzer_machine_Entity extends BlockEntity implements ImplementedInventory, SidedInventory, ExtendedScreenHandlerFactory
 {
     DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2,ItemStack.EMPTY);
     public Electrolyzer_machine_Entity(BlockPos pos, BlockState state)
@@ -80,5 +82,11 @@ public class Electrolyzer_machine_Entity extends BlockEntity implements Implemen
     public void beBreaking(Electrolyzer_machine_Entity entity)
     {
         entity.inventory.set(1,ItemStack.EMPTY);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf)
+    {
+        buf.writeBlockPos(pos);
     }
 }
