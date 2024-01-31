@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "periodic-table-of-elements:tin_raw"
+	},
+	"result": "periodic-table-of-elements:tin_ingot",
+	"experience": 0.15,
+	"cookingtime": 200
+}
