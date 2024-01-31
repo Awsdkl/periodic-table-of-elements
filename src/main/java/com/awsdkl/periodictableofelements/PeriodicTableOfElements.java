@@ -12,10 +12,7 @@ import com.awsdkl.periodictableofelements.client.recipes.Gas_tank_Recipes;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Air_ICT_recipes;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Blocks.Generator_ICT_recipes;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Blocks.Industry_crafting_table_ICT_recipes;
-import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.Battery_ICT_recipes;
-import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.Hammer_ICT_recipes;
-import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.Shears_ICT_recipes;
-import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.Tin_plate_ICT_recipes;
+import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.*;
 import com.awsdkl.periodictableofelements.item.Battery;
 import com.awsdkl.periodictableofelements.item.Gas_tank;
 import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
@@ -188,36 +185,40 @@ public class PeriodicTableOfElements implements ModInitializer {
 
 
         //添加物品到物品组
-        ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content ->
-        {
-            content.add(S_GAS_TANK);
-            content.add(M_GAS_TANK);
-            content.add(L_GAS_TANK);
-            content.add(ELECTROLYZER_MACHINE_ITEM);
-            content.add(INDUSTRY_CRAFTING_TABLE_ITEM);
-            content.add(HAMMER);
-            content.add(SHEARS);
-            content.add(IRON_PLATE);
-            content.add(TIN_PLATE);
-            content.add(GENERATOR_ITEM);
-            content.add(BATTERY);
-            content.add(TIN_ORE_ITEM);
-            content.add(TIN_RAW);
+        // block arraies
+        Gas_tank modGroup_GasTank[] = {S_GAS_TANK, M_GAS_TANK, L_GAS_TANK};
+        Block naturalBlocks[] = {TIN_ORE, DEEPSLATE_TIN_ORE, TIN_RAW_BLOCK};
+        BlockItem modGroup_BlockItem[] = {ELECTROLYZER_MACHINE_ITEM, INDUSTRY_CRAFTING_TABLE_ITEM, GENERATOR_ITEM, TIN_ORE_ITEM};
+        Item ingredients[] = {TIN_RAW, TIN_INGOT};
+        Item modGroup_Item[] = {HAMMER, SHEARS, IRON_PLATE, TIN_PLATE, TIN_RAW, COPPER_PLATE};
+        Battery modGroup_battery[] = {BATTERY};
+
+        ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content -> {
+            // the i is the size of array
+            for (Gas_tank gasTank : modGroup_GasTank) {
+                content.add(gasTank);
+            }
+            for (BlockItem blockItem : modGroup_BlockItem) {
+                content.add(blockItem);
+            }
+            for (Item item : modGroup_Item) {
+                content.add(item);
+            }
+            for (Battery battery : modGroup_battery) {
+                content.add(battery);
+            }
         });
 
-        ItemGroupEvents.modifyEntriesEvent(PTOE_NATURAL_BLOCKS).register(content ->
-        {
-            content.add(TIN_ORE);
-            content.add(DEEPSLATE_TIN_ORE);
-
-            content.add(TIN_RAW_BLOCK);
+        ItemGroupEvents.modifyEntriesEvent(PTOE_NATURAL_BLOCKS).register(content -> {
+            for (Block naturalBlock : naturalBlocks) {
+                content.add(naturalBlock);
+            }
         });
 
-        ItemGroupEvents.modifyEntriesEvent(PTOE_INGREDIENTS).register(content ->
-        {
-            content.add(TIN_RAW);
-
-            content.add(TIN_INGOT);
+        ItemGroupEvents.modifyEntriesEvent(PTOE_INGREDIENTS).register(content -> {
+            for (Item ingredient : ingredients) {
+                content.add(ingredient);
+            }
         });
 
         //添加工业工作台的配方
@@ -230,5 +231,9 @@ public class PeriodicTableOfElements implements ModInitializer {
 
         /*0 :空气*/           Industry_crafting_table_Entity.addShapelessRecipes(new Air_ICT_recipes());
         /*1 :锡板*/           Industry_crafting_table_Entity.addShapelessRecipes(new Tin_plate_ICT_recipes());
+        /*2 :Copper Plate*/
+        Industry_crafting_table_Entity.addShapelessRecipes(new Copper_plate_ICT_recipes());
+
+        // Hanatomizu: Uhh my fcitx5 doesn't work in Intellij Idea for no reason QAQ
     }
 }
