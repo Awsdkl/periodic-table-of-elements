@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/leaves",
+    "textures": {
+        "all": "periodic-table-of-elements:block/rubber_leaves/side"
+    }
+}

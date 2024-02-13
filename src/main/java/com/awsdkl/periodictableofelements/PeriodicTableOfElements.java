@@ -1,9 +1,6 @@
 package com.awsdkl.periodictableofelements;
 
-import com.awsdkl.periodictableofelements.block.blocks.Copper_cable;
-import com.awsdkl.periodictableofelements.block.blocks.Electrolyzer_machine;
-import com.awsdkl.periodictableofelements.block.blocks.Generator;
-import com.awsdkl.periodictableofelements.block.blocks.Industry_crafting_table;
+import com.awsdkl.periodictableofelements.block.blocks.*;
 import com.awsdkl.periodictableofelements.block.entities.Copper_cable_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Electrolyzer_machine_Entity;
 import com.awsdkl.periodictableofelements.block.entities.Generator_Entity;
@@ -123,6 +120,30 @@ public class PeriodicTableOfElements implements ModInitializer {
     public static final Block TIN_RAW_BLOCK = new Block(FabricBlockSettings.of(Material.STONE, MapColor.RAW_IRON_PINK));
     public static final BlockItem TIN_RAW_BLOCK_ITEM = new BlockItem(TIN_RAW_BLOCK,new Item.Settings());
 
+    //rubber_log
+    public static final Rubber_log RUBBER_LOG = new Rubber_log(FabricBlockSettings.of(Material.WOOD));
+    public static final BlockItem RUBBER_LOG_ITEM = new BlockItem(RUBBER_LOG, new Item.Settings());
+
+    //rubber_leaves
+    public static final Rubber_leaves RUBBER_LEAVES = new Rubber_leaves(FabricBlockSettings.of(Material.LEAVES));
+    public static final BlockItem RUBBER_LEAVES_ITEM = new BlockItem(RUBBER_LEAVES, new Item.Settings());
+
+    //rubber_wood
+    public static final Rubber_wood RUBBER_WOOD = new Rubber_wood(FabricBlockSettings.of(Material.WOOD));
+    public static final BlockItem RUBBER_WOOD_ITEM = new BlockItem(RUBBER_WOOD, new Item.Settings());
+
+    //rubber_planks
+    public static final Block RUBBER_PLANKS = new Block(FabricBlockSettings.of(Material.WOOD));
+    public static final BlockItem RUBBER_PLANKS_ITEM = new BlockItem(RUBBER_PLANKS, new Item.Settings());
+
+    //stripped_rubber_log
+    public static final Stripped_rubber_log STRIPPED_RUBBER_LOG = new Stripped_rubber_log(FabricBlockSettings.of(Material.WOOD));
+    public static final BlockItem STRIPPED_RUBBER_LOG_ITEM = new BlockItem(STRIPPED_RUBBER_LOG, new Item.Settings());
+
+    //stripped_rubber_wood
+    public static final Stripped_rubber_wood STRIPPED_RUBBER_WOOD = new Stripped_rubber_wood(FabricBlockSettings.of(Material.WOOD));
+    public static final BlockItem STRIPPED_RUBBER_WOOD_ITEM = new BlockItem(STRIPPED_RUBBER_WOOD, new Item.Settings());
+
     //创建物品组
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE, "mod_group"))
             .icon(() -> new ItemStack(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_ITEM))
@@ -183,18 +204,36 @@ public class PeriodicTableOfElements implements ModInitializer {
         Registry.register(Registries.BLOCK, new Identifier(NAMESPACE,"tin_raw_block"),TIN_RAW_BLOCK);
         Registry.register(Registries.ITEM, new Identifier(NAMESPACE,"tin_raw_block"),TIN_RAW_BLOCK_ITEM);
 
+        //rubber_log
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "rubber_log"), RUBBER_LOG);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "rubber_log"), RUBBER_LOG_ITEM);
+        //rubber_wood
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "rubber_wood"), RUBBER_WOOD);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "rubber_wood"), RUBBER_WOOD_ITEM);
+        //rubber_leaves
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "rubber_leaves"), RUBBER_LEAVES);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "rubber_leaves"), RUBBER_LEAVES_ITEM);
+        //rubber_planks
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "rubber_planks"), RUBBER_PLANKS);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "rubber_planks"), RUBBER_PLANKS_ITEM);
+        //stripped_rubber_log
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "stripped_rubber_log"), STRIPPED_RUBBER_LOG);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "stripped_rubber_log"), STRIPPED_RUBBER_LOG_ITEM);
+        //stripped_rubber_wood
+        Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, "stripped_rubber_wood"), STRIPPED_RUBBER_WOOD);
+        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, "stripped_rubber_wood"), STRIPPED_RUBBER_WOOD_ITEM);
 
         //添加物品到物品组
         // block arraies
-        Gas_tank modGroup_GasTank[] = {S_GAS_TANK, M_GAS_TANK, L_GAS_TANK};
-        Block naturalBlocks[] = {TIN_ORE, DEEPSLATE_TIN_ORE, TIN_RAW_BLOCK};
-        BlockItem modGroup_BlockItem[] = {ELECTROLYZER_MACHINE_ITEM, INDUSTRY_CRAFTING_TABLE_ITEM, GENERATOR_ITEM, TIN_ORE_ITEM};
-        Item ingredients[] = {TIN_RAW, TIN_INGOT};
-        Item modGroup_Item[] = {HAMMER, SHEARS, IRON_PLATE, TIN_PLATE, TIN_RAW, COPPER_PLATE};
-        Battery modGroup_battery[] = {BATTERY};
+        Gas_tank[] modGroup_GasTank = {S_GAS_TANK, M_GAS_TANK, L_GAS_TANK};
+        Block[] naturalBlocks = {TIN_ORE, DEEPSLATE_TIN_ORE, TIN_RAW_BLOCK};
+        BlockItem[] modGroup_BlockItem = {ELECTROLYZER_MACHINE_ITEM, INDUSTRY_CRAFTING_TABLE_ITEM, GENERATOR_ITEM, TIN_ORE_ITEM};
+        Item[] ingredients = {TIN_RAW, TIN_INGOT};
+        Item[] modGroup_Item = {HAMMER, SHEARS, IRON_PLATE, TIN_PLATE, TIN_RAW, COPPER_PLATE};
+        Battery[] modGroup_battery = {BATTERY};
 
         ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content -> {
-            // the i is the size of array
+            // the "i" is the size of array
             for (Gas_tank gasTank : modGroup_GasTank) {
                 content.add(gasTank);
             }
