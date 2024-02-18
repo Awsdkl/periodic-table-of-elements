@@ -1,5 +1,6 @@
 package com.awsdkl.periodictableofelements.block.entities;
 
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedInventory;
 import com.awsdkl.periodictableofelements.screen.handler.Generator_ScreenHandler;
@@ -92,7 +93,7 @@ public class Generator_Entity extends BlockEntity implements ImplementedInventor
      */
     public void bePlacing(Generator_Entity entity)
     {
-        entity.inventory.set(2, new ItemStack(PeriodicTableOfElements.TEST_FAN));
+        entity.inventory.set(2, new ItemStack(ModItems.TEST_FAN));
     }
 
     @Override

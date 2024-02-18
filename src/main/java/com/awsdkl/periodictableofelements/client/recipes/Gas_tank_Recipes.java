@@ -1,5 +1,6 @@
 package com.awsdkl.periodictableofelements.client.recipes;
 
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
@@ -33,8 +34,8 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
             if(i == 4)
             {
                 if(stack.getItem() == Items.LEATHER) list.add(stack);
-                if(stack.getItem() == PeriodicTableOfElements.S_GAS_TANK) list.add(stack);
-                if(stack.getItem() == PeriodicTableOfElements.M_GAS_TANK) list.add(stack);
+                if(stack.getItem() == ModItems.S_GAS_TANK) list.add(stack);
+                if(stack.getItem() == ModItems.M_GAS_TANK) list.add(stack);
             }
             else if(stack.getItem() == Items.IRON_INGOT) list.add(stack);
         }
@@ -57,8 +58,8 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
             else if(i == 4)
             {
                 hasLeather = stack.getItem() == Items.LEATHER;
-                hasS_Gas_tank = stack.getItem() == PeriodicTableOfElements.S_GAS_TANK;
-                hasM_Gas_tank = stack.getItem() == PeriodicTableOfElements.M_GAS_TANK;
+                hasS_Gas_tank = stack.getItem() == ModItems.S_GAS_TANK;
+                hasM_Gas_tank = stack.getItem() == ModItems.M_GAS_TANK;
             }
             else return ItemStack.EMPTY;
         }
@@ -70,17 +71,17 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
             if(hasLeather)
             {
                 tmp = 1;
-                stack = new ItemStack(PeriodicTableOfElements.S_GAS_TANK);
+                stack = new ItemStack(ModItems.S_GAS_TANK);
             }
             if(hasS_Gas_tank)
             {
                 tmp = 2;
-                stack = new ItemStack(PeriodicTableOfElements.M_GAS_TANK);
+                stack = new ItemStack(ModItems.M_GAS_TANK);
             }
             if(hasM_Gas_tank)
             {
                 tmp = 3;
-                stack = new ItemStack(PeriodicTableOfElements.L_GAS_TANK);
+                stack = new ItemStack(ModItems.L_GAS_TANK);
             }
 
             NbtCompound nbt = new NbtCompound();
