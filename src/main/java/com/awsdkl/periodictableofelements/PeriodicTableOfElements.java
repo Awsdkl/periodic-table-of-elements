@@ -235,5 +235,6 @@ public class PeriodicTableOfElements implements ModInitializer {
         Industry_crafting_table_Entity.addShapelessRecipes(new Copper_plate_ICT_recipes());
 
         // Hanatomizu: Uhh my fcitx5 doesn't work in Intellij Idea for no reason QAQ
+
     }
 }
