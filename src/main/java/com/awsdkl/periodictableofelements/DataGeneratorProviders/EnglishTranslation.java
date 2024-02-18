@@ -1,14 +1,9 @@
 package com.awsdkl.periodictableofelements.DataGeneratorProviders;
 
-import com.awsdkl.periodictableofelements.ModBlocks;
 import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import com.awsdkl.periodictableofelements.item.Battery;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-
-import javax.swing.*;
-import java.nio.file.Path;
 
 public class EnglishTranslation extends FabricLanguageProvider {
     public EnglishTranslation(FabricDataOutput dataGenerator) {
