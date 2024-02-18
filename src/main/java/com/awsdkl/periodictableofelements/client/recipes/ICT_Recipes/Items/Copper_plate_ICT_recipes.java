@@ -1,6 +1,6 @@
 package com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items;
 
-import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.ICT_Recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,9 +18,9 @@ public class Copper_plate_ICT_recipes extends ICT_Recipe {
         for (int i = 0; i <= 9; i++) {
             if (inventory.get(i).isEmpty())
                 continue;
-            if (inventory.get(i).getItem() != PeriodicTableOfElements.HAMMER && inventory.get(i).getItem() != Items.COPPER_INGOT)
+            if (inventory.get(i).getItem() != ModItems.HAMMER && inventory.get(i).getItem() != Items.COPPER_INGOT)
                 return false;
-            if (inventory.get(i).getItem() == PeriodicTableOfElements.HAMMER) {
+            if (inventory.get(i).getItem() == ModItems.HAMMER) {
                 if (has_hammer) return false;
                 has_hammer = true;
             }
@@ -35,7 +35,7 @@ public class Copper_plate_ICT_recipes extends ICT_Recipe {
 
     @Override
     public ItemStack craft(DefaultedList<ItemStack> inventory) {
-        ItemStack stack = new ItemStack(PeriodicTableOfElements.COPPER_PLATE);
+        ItemStack stack = new ItemStack(ModItems.COPPER_PLATE);
         stack.setCount(2);
         return stack;
     }

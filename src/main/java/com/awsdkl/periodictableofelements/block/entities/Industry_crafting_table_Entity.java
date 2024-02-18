@@ -1,5 +1,6 @@
 package com.awsdkl.periodictableofelements.block.entities;
 
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.inventory.ImplementedInventory;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.GetRecipe;
@@ -157,7 +158,7 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
 
     //这个函数用在此方块被破坏时
     //当破坏时，则将输出物品栏中的物品设置为空
-    public static void beBreaking(Industry_crafting_table_Entity entity)
+    public void beBreaking(Industry_crafting_table_Entity entity)
     {
         entity.inventory.set(9,ItemStack.EMPTY);
         entity.inventory.set(10,ItemStack.EMPTY);
@@ -165,7 +166,7 @@ public class Industry_crafting_table_Entity extends BlockEntity implements Imple
 
     public static void bePlacing(Industry_crafting_table_Entity entity)
     {
-        entity.inventory.set(10,new ItemStack(PeriodicTableOfElements.TEST_FAN));
+        entity.inventory.set(10,new ItemStack(ModItems.TEST_FAN));
     }
 
     @Override

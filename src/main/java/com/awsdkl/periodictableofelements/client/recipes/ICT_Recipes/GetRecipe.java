@@ -1,6 +1,6 @@
 package com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes;
 
-import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.Type_of_Item;
 import com.awsdkl.periodictableofelements.block.entities.Industry_crafting_table_Entity;
 import net.minecraft.item.Item;
@@ -31,11 +31,11 @@ public class GetRecipe
             {
                 if(i2 == Items.IRON_BLOCK)
                 {
-                    if(i3 == PeriodicTableOfElements.HAMMER)
+                    if(i3 == ModItems.HAMMER)
                     {
                         if(i4 == Items.CRAFTING_TABLE)
                         {
-                            if(i5 == PeriodicTableOfElements.SHEARS)
+                            if(i5 == ModItems.SHEARS)
                             {
                                 if(Type_of_Item.isPlank(i6))
                                 {
@@ -80,7 +80,7 @@ public class GetRecipe
                     }
                     else if(Type_of_Item.isPlank(i3))
                     {
-                        if(i4 == PeriodicTableOfElements.BATTERY)
+                        if(i4 == ModItems.BATTERY)
                         {
                             if(Type_of_Item.isPlank(i5))
                             {
@@ -131,7 +131,7 @@ public class GetRecipe
             {
                 if(i2 == Items.AIR)
                 {
-                    if(i3 == PeriodicTableOfElements.TIN_PLATE)
+                    if(i3 == ModItems.TIN_PLATE)
                     {
                         if(i4 == Items.REDSTONE)
                         {
