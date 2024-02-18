@@ -1,5 +1,6 @@
 package com.awsdkl.periodictableofelements;
 
+import com.awsdkl.periodictableofelements.DataGeneratorProviders.ChineseTranslation;
 import com.awsdkl.periodictableofelements.DataGeneratorProviders.EnglishTranslation;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -12,5 +13,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
 
         // Add providers
         pack.addProvider(EnglishTranslation::new);
+        pack.addProvider(ChineseTranslation::new);
     }
 }
