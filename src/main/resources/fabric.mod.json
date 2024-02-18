@@ -14,6 +14,9 @@
   "icon": "assets/periodic-table-of-elements/textures/item/test_fan.png",
   "environment": "*",
   "entrypoints": {
+    "fabric-datagen": [
+      "com.awsdkl.periodictableofelements.DataGenerator"
+    ],
     "client": [
       "com.awsdkl.periodictableofelements.client.PeriodicTableOfElementsClient"
     ],
