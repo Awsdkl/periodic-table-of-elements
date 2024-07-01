@@ -1,7 +1,6 @@
 package com.awsdkl.periodictableofelements.client;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import com.awsdkl.periodictableofelements.block.models.providers.Copper_cable_ModelProviders;
 import com.awsdkl.periodictableofelements.screen.screen.Electrolyzer_machine_Screen;
 import com.awsdkl.periodictableofelements.screen.screen.Generator_Screen;
 import com.awsdkl.periodictableofelements.screen.screen.Industry_crafting_table_Screen;
@@ -18,6 +17,5 @@ public class PeriodicTableOfElementsClient implements ClientModInitializer {
         HandledScreens.register(PeriodicTableOfElements.ELECTROLYZER_MACHINE_SCREEN_HANDLER, Electrolyzer_machine_Screen::new);
         HandledScreens.register(PeriodicTableOfElements.INDUSTRY_CRAFTING_TABLE_SCREEN_HANDLER, Industry_crafting_table_Screen::new);
         HandledScreens.register(PeriodicTableOfElements.GENERATOR_SCREEN_HANDLER, Generator_Screen::new);
-        ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new Copper_cable_ModelProviders());
     }
 }

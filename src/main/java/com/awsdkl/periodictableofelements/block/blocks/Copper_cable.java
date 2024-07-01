@@ -2,7 +2,6 @@ package com.awsdkl.periodictableofelements.block.blocks;
 
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.block.entities.Copper_cable_Entity;
-import com.awsdkl.periodictableofelements.block.models.models.Copper_cable_Model;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -15,14 +14,12 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.listener.GameEventListener;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * copper_cable_Model: {@link Copper_cable_Model}
- */
 public class Copper_cable extends BlockWithEntity
 {
     //状态
@@ -83,24 +80,32 @@ public class Copper_cable extends BlockWithEntity
         builder.add(EAST);
     }
 
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0,0.0,0.0,16.0,16.0,16.0);
+    private static final VoxelShape SHAPE_MID = Block.createCuboidShape(6.0,6.0,6.0,10.0,10.0,10.0);
+    private static final VoxelShape SHAPE_TOP = Block.createCuboidShape(6.0,10.0,6.0,10.0,16.0,10.0);
+    private static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(6.0,0.0,6.0,10.0,6.0,10.0);
+    private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(6.0,6.0,0.0,10.0,10.0,6.0);
+    private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(6.0,6.0,10.0,10.0,10.0,16.0);
+    private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(0.0,6.0,6.0,6.0,10.0,10.0);
+    private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(10.0,6.0,6.0,16.0,10.0,10.0);
+
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
-        return SHAPE;
+        return SHAPE_MID;
     }
     /**
-     * Custom the shape of block.<br/>
      * 方块的描边模型。<br/>
-     * @param state BlockState
-     * @param world BlockView
-     * @param pos BlockPos
-     * @param context ShapeContext
-     * @return VoxelShape
      */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
-        return SHAPE;
+        VoxelShape shape_re = SHAPE_MID;
+        if(state.get(TOP)) shape_re = VoxelShapes.union(shape_re,SHAPE_TOP);
+        if(state.get(BOTTOM)) shape_re = VoxelShapes.union(shape_re,SHAPE_BOTTOM);
+        if(state.get(NORTH)) shape_re = VoxelShapes.union(shape_re,SHAPE_NORTH);
+        if(state.get(SOUTH)) shape_re = VoxelShapes.union(shape_re,SHAPE_SOUTH);
+        if(state.get(WEST)) shape_re = VoxelShapes.union(shape_re,SHAPE_WEST);
+        if(state.get(EAST)) shape_re = VoxelShapes.union(shape_re,SHAPE_EAST);
+        return shape_re;
     }
 }
