@@ -91,7 +91,14 @@ public class Copper_cable extends BlockWithEntity
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
-        return SHAPE_MID;
+        VoxelShape shape_re = SHAPE_MID;
+        if(state.get(TOP)) shape_re = VoxelShapes.union(shape_re,SHAPE_TOP);
+        if(state.get(BOTTOM)) shape_re = VoxelShapes.union(shape_re,SHAPE_BOTTOM);
+        if(state.get(NORTH)) shape_re = VoxelShapes.union(shape_re,SHAPE_NORTH);
+        if(state.get(SOUTH)) shape_re = VoxelShapes.union(shape_re,SHAPE_SOUTH);
+        if(state.get(WEST)) shape_re = VoxelShapes.union(shape_re,SHAPE_WEST);
+        if(state.get(EAST)) shape_re = VoxelShapes.union(shape_re,SHAPE_EAST);
+        return shape_re;
     }
     /**
      * 方块的描边模型。<br/>
