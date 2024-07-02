@@ -1,7 +1,24 @@
 {
-  "variants":
-  {
-    "": {"model": "periodic-table-of-elements:block/copper_cable"}
-  }
+  "multipart":
+  [
+    {
+      "apply":
+      {
+        "model": "periodic-table-of-elements:block/copper_cable/mid",
+        "uvlock": true
+      }
+    },
+    {
+      "apply":
+      {
+        "model": "periodic-table-of-elements:block/copper_cable/top",
+        "uvlock": true
+      },
+      "when":
+      {
+        "top": true
+      }
+    }
+  ]
 }
 
