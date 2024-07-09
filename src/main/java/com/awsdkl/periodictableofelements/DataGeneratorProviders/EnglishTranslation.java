@@ -1,7 +1,7 @@
 package com.awsdkl.periodictableofelements.DataGeneratorProviders;
 
+import com.awsdkl.periodictableofelements.ModGroups;
 import com.awsdkl.periodictableofelements.ModItems;
-import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
@@ -55,9 +55,9 @@ public class EnglishTranslation extends FabricLanguageProvider {
         translationBuilder.add(ModItems.COPPER_PLATE, "Copper Plate");
 
         // UI
-        translationBuilder.add(PeriodicTableOfElements.MOD_GROUP, "Periodic Table of Elements");
-        translationBuilder.add(PeriodicTableOfElements.PTOE_INGREDIENTS, "PTE - Ingredients");
-        translationBuilder.add(PeriodicTableOfElements.PTOE_NATURAL_BLOCKS, "PTE - Natural Blocks");
+        translationBuilder.add(ModGroups.MOD_GROUP, "Periodic Table of Elements");
+        translationBuilder.add(ModGroups.PTOE_INGREDIENTS, "PTE - Ingredients");
+        translationBuilder.add(ModGroups.PTOE_NATURAL_BLOCKS, "PTE - Natural Blocks");
 
         // Tooltips
         translationBuilder.add("item.periodic-table-of-elements.battery.tooltip_1", "Remaining: %d %%");

@@ -5,9 +5,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+import static com.awsdkl.periodictableofelements.PeriodicTableOfElements.NAMESPACE;
+
 public class Block
 {
-    public static final String NAMESPACE = "periodic-table-of-elements";
     private static void register(String id, net.minecraft.block.Block block)
     {
         Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, id), block);

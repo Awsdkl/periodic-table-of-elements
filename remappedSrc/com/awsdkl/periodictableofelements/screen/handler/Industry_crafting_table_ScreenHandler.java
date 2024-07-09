@@ -6,16 +6,20 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 
 public class Industry_crafting_table_ScreenHandler extends ScreenHandler
 {
+    public BlockPos pos;
     public Inventory inventory;
 
-    public Industry_crafting_table_ScreenHandler(int synId,PlayerInventory playerInventory)
+    public Industry_crafting_table_ScreenHandler(int synId, PlayerInventory playerInventory, PacketByteBuf buf)
     {
         this(synId,playerInventory,new SimpleInventory(11));
+        pos = buf.readBlockPos();
     }
 
     public Industry_crafting_table_ScreenHandler(int synId, PlayerInventory playerInventory, Inventory inventory)
@@ -76,6 +80,8 @@ public class Industry_crafting_table_ScreenHandler extends ScreenHandler
         {
             this.addSlot(new Slot(playerInventory,i,8 + i * 18,142));
         }
+
+        pos = BlockPos.ORIGIN;
     }
 
 

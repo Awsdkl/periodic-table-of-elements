@@ -7,6 +7,10 @@
 
 # IntelliJ
 out/
+
+# Kotlin
+/.kotlin
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 

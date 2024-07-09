@@ -11,31 +11,26 @@ import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Air_ICT_rec
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Blocks.Generator_ICT_recipes;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Blocks.Industry_crafting_table_ICT_recipes;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items.*;
-import com.awsdkl.periodictableofelements.item.Battery;
-import com.awsdkl.periodictableofelements.item.Gas_tank;
 import com.awsdkl.periodictableofelements.screen.handler.Electrolyzer_machine_ScreenHandler;
 import com.awsdkl.periodictableofelements.screen.handler.Generator_ScreenHandler;
 import com.awsdkl.periodictableofelements.screen.handler.Industry_crafting_table_ScreenHandler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialRecipeSerializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PeriodicTableOfElements implements ModInitializer {
     public static final String NAMESPACE = "periodic-table-of-elements";
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
     //特殊合成表
     public static final RecipeSerializer<Gas_tank_Recipes> GAS_TANK_RECIPE = RecipeSerializer.register("gas_tank_recipe", new SpecialRecipeSerializer<>(Gas_tank_Recipes::new));
     //Electrolyzer_machine(电解装置)
@@ -67,29 +62,12 @@ public class PeriodicTableOfElements implements ModInitializer {
     //Copper_cable(铜制线缆)
     public static BlockEntityType<Copper_cable_Entity> COPPER_CABLE_ENTITY;
 
-    //tin_ore(锡矿石)
-
-    //创建物品组
-    public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(new Identifier(NAMESPACE, "mod_group"))
-            .icon(() -> new ItemStack(ModItems.INDUSTRY_CRAFTING_TABLE_ITEM))
-            .build();
-    //元素周期表 自然方块(PTOE Natural Blocks)物品组
-    public static final ItemGroup PTOE_NATURAL_BLOCKS = FabricItemGroup.builder(new Identifier(NAMESPACE,"ptoe_natural_blocks"))
-            .icon(() -> new ItemStack(ModBlocks.TIN_ORE))
-            .build();
-    //元素周期表 原材料(PTOE Ingredients)物品组
-    public static final ItemGroup PTOE_INGREDIENTS = FabricItemGroup.builder(new Identifier(NAMESPACE,"ptoe_ingredients"))
-            .icon(() -> new ItemStack(ModItems.TIN_INGOT))
-            .build();
-
     @Override
     public void onInitialize()
     {
+        LOGGER.info("Start loading Periodic Table of Elements!");
         //注册物品
-
-
         //注册方块及其物品(还有一些杂项，一个方块的东西将会被放在一起)
-
         //electrolyzer_machine(电解装置)
         ELECTROLYZER_MACHINE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(NAMESPACE, "electrolyzer_machine"), FabricBlockEntityTypeBuilder.create(Electrolyzer_machine_Entity::new, ModBlocks.ELECTROLYZER_MACHINE).build(null));
         //industry_crafting_table(工业工作台)
@@ -99,45 +77,11 @@ public class PeriodicTableOfElements implements ModInitializer {
         //copper_cable(铜质线缆)
         COPPER_CABLE_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(NAMESPACE, "copper_cable"), FabricBlockEntityTypeBuilder.create(Copper_cable_Entity::new, ModBlocks.COPPER_CABLE).build(null));
 
-        //tin_ore(锡矿石)
+        // 注册物品组并添加物品到物品组
+        LOGGER.info("Registering Item Groups");
+        com.awsdkl.periodictableofelements.Registry.Groups.Companion.init();
 
-        //添加物品到物品组
-        // block arraies
-        Gas_tank[] modGroup_GasTank = {ModItems.S_GAS_TANK, ModItems.M_GAS_TANK, ModItems.L_GAS_TANK};
-        Block[] naturalBlocks = {ModBlocks.TIN_ORE, ModBlocks.DEEPSLATE_TIN_ORE, ModBlocks.TIN_RAW_BLOCK};
-        BlockItem[] modGroup_BlockItem = {ModItems.ELECTROLYZER_MACHINE_ITEM, ModItems.INDUSTRY_CRAFTING_TABLE_ITEM, ModItems.GENERATOR_ITEM, ModItems.TIN_ORE_ITEM};
-        Item[] ingredients = {ModItems.TIN_RAW, ModItems.TIN_INGOT};
-        Item[] modGroup_Item = {ModItems.HAMMER, ModItems.SHEARS, ModItems.IRON_PLATE, ModItems.TIN_PLATE, ModItems.TIN_RAW, ModItems.COPPER_PLATE};
-        Battery[] modGroup_battery = {ModItems.BATTERY};
-
-        ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content -> {
-            // the "i" is the size of array
-            for (Gas_tank gasTank : modGroup_GasTank) {
-                content.add(gasTank);
-            }
-            for (BlockItem blockItem : modGroup_BlockItem) {
-                content.add(blockItem);
-            }
-            for (Item item : modGroup_Item) {
-                content.add(item);
-            }
-            for (Battery battery : modGroup_battery) {
-                content.add(battery);
-            }
-        });
-
-        ItemGroupEvents.modifyEntriesEvent(PTOE_NATURAL_BLOCKS).register(content -> {
-            for (Block naturalBlock : naturalBlocks) {
-                content.add(naturalBlock);
-            }
-        });
-
-        ItemGroupEvents.modifyEntriesEvent(PTOE_INGREDIENTS).register(content -> {
-            for (Item ingredient : ingredients) {
-                content.add(ingredient);
-            }
-        });
-
+        LOGGER.info("Applying recipes to Industrial Crafting Table");
         //添加工业工作台的配方
         /*0 :空气*/           Industry_crafting_table_Entity.addShapedRecipes(new Air_ICT_recipes());
         /*1 :工业工作台*/      Industry_crafting_table_Entity.addShapedRecipes(new Industry_crafting_table_ICT_recipes());
@@ -151,7 +95,7 @@ public class PeriodicTableOfElements implements ModInitializer {
         /*2 :Copper Plate*/
         Industry_crafting_table_Entity.addShapelessRecipes(new Copper_plate_ICT_recipes());
 
-
+        LOGGER.info("Registering Blocks and Items");
         StrippableBlock.init();
         FlammableBlock.init();
         com.awsdkl.periodictableofelements.Registry.Block.init();
