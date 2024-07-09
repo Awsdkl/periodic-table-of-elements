@@ -1,7 +1,7 @@
 package com.awsdkl.periodictableofelements.DataGeneratorProviders;
 
+import com.awsdkl.periodictableofelements.ModGroups;
 import com.awsdkl.periodictableofelements.ModItems;
-import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
@@ -55,9 +55,9 @@ public class ChineseTranslation extends FabricLanguageProvider {
         translationBuilder.add(ModItems.COPPER_PLATE, "铜板");
 
         // UI
-        translationBuilder.add(PeriodicTableOfElements.MOD_GROUP, "元素周期表");
-        translationBuilder.add(PeriodicTableOfElements.PTOE_INGREDIENTS, "元素周期表 - 原料");
-        translationBuilder.add(PeriodicTableOfElements.PTOE_NATURAL_BLOCKS, "元素周期表 - 自然方块");
+        translationBuilder.add(ModGroups.MOD_GROUP, "元素周期表");
+        translationBuilder.add(ModGroups.PTOE_INGREDIENTS, "元素周期表 - 原料");
+        translationBuilder.add(ModGroups.PTOE_NATURAL_BLOCKS, "元素周期表 - 自然方块");
 
         // Tooltips
         translationBuilder.add("item.periodic-table-of-elements.battery.tooltip_1", "剩余电量: %d %%");

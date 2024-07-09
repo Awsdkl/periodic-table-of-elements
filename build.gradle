@@ -1,12 +1,14 @@
 plugins {
-    id 'fabric-loom' version '1.0.17'
+    id 'fabric-loom' version '1.6.12'
     id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 version = project.mod_version
 group = project.maven_group
 
 repositories {
+    mavenCentral()
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -22,6 +24,11 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Kotin support
+    modImplementation "net.fabricmc:fabric-language-kotlin:1.11.0+kotlin.2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
 }
 
 processResources {
@@ -102,4 +109,7 @@ loom {
             runDir "build/datagen"
         }
     }
+}
+kotlin {
+    jvmToolchain(17)
 }

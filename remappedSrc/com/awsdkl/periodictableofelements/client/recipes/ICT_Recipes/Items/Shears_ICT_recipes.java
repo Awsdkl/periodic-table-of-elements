@@ -1,5 +1,6 @@
 package com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.Items;
 
+import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
 import com.awsdkl.periodictableofelements.client.recipes.ICT_Recipes.ICT_Recipe;
 import net.minecraft.item.ItemStack;
@@ -31,6 +32,6 @@ public class Shears_ICT_recipes extends ICT_Recipe
     @Override
     public ItemStack craft(DefaultedList<ItemStack> inventory)
     {
-        return new ItemStack(PeriodicTableOfElements.SHEARS);
+        return new ItemStack(ModItems.SHEARS);
     }
 }

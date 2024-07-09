@@ -2,7 +2,7 @@ package com.awsdkl.periodictableofelements.client.recipes;
 
 import com.awsdkl.periodictableofelements.ModItems;
 import com.awsdkl.periodictableofelements.PeriodicTableOfElements;
-import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +23,7 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
     }
 
     @Override
-    public boolean matches(CraftingInventory inventory, World world) {
+    public boolean matches(RecipeInputInventory inventory, World world) {
         ArrayList<ItemStack> list = Lists.newArrayList();
         for(int i = 0;i < inventory.size();i++)
         {
@@ -43,7 +43,7 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
     }
 
     @Override
-    public ItemStack craft(CraftingInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(RecipeInputInventory inventory, DynamicRegistryManager registryManager) {
         boolean hasLeather = false;
         boolean hasS_Gas_tank = false;
         boolean hasM_Gas_tank = false;
@@ -101,7 +101,7 @@ public class Gas_tank_Recipes extends SpecialCraftingRecipe {
     }
 
     @Override
-    public DefaultedList<ItemStack> getRemainder(CraftingInventory inventory) {
+    public DefaultedList<ItemStack> getRemainder(RecipeInputInventory inventory) {
         return super.getRemainder(inventory);
     }
 
